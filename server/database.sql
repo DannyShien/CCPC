@@ -1,4 +1,4 @@
-CREATE DATABASE ccpc; 
+-- CREATE DATABASE ccpc;
 
 -- CREATE TABLE user (
 --   id SERIAL PRIMARY KEY, 
@@ -8,9 +8,9 @@ CREATE DATABASE ccpc;
 
 CREATE TABLE year (
   id SERIAL PRIMARY KEY,
-  yearFolder integer, 
-  -- id_user integer references user (id)
+  name integer
 ); 
+  -- id_user integer references user (id)
 
 CREATE TABLE video (
   id SERIAL PRIMARY KEY, 
@@ -19,8 +19,8 @@ CREATE TABLE video (
   posting_date DATE NOT NULL DEFAULT CURRENT_DATE,
   videoId integer,
   id_year integer references year (id), 
-  -- id_user integer references user (id)
 );
+  -- id_user integer references user (id)
 
 
 
