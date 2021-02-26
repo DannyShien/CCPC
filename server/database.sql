@@ -1,3 +1,5 @@
+CREATE DATABASE ccpc; 
+
 -- CREATE TABLE user (
 --   id SERIAL PRIMARY KEY, 
 --   userName text, 
