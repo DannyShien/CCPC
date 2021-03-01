@@ -12,13 +12,13 @@ CREATE TABLE year (
 ); 
   -- id_user integer references user (id)
 
-CREATE TABLE video (
+CREATE TABLE videos (
   id SERIAL PRIMARY KEY, 
   title text, 
-  subVerse text, 
+  sub_verse text, 
   posting_date DATE NOT NULL DEFAULT CURRENT_DATE,
-  videoId integer,
-  id_year integer references year (id), 
+  video_id text,
+  id_year integer references year (id)
 );
   -- id_user integer references user (id)
 
