@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "reset-db": "dropdb ccpc-db; createdb ccpc-db; psql -f database.sql ccpc-db; psql -f seed.sql ccpc-db; psql ccpc-db",
+    "debug": "node --inspect-brk index.js",
+    "dev": "nodemon index.js"
   },
   "author": "",
   "license": "ISC",
