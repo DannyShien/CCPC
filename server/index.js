@@ -4,7 +4,7 @@ const cors = require("cors");
 const pool = require("./db");
 app.use(express.json());
 
-// ===== MIDDLEWARE ===== //
+// ========== MIDDLEWARE ========== //
 app.use(cors());
 app.use(express.json());
 
@@ -91,39 +91,72 @@ app.get("/videos/:id", async (req, res) => {
 });
 
 // ========== UPDATE ========== //
-// UPDATE YEAR NAME YEAR_ID
+// UPDATE FOLDER(YEAR) NAME BY ID
 app.put("/year/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    console.log(req.body);
     const updatedName = req.body.name;
-    const yearUpdate = await pool.query(
-      "UPDATE year SET name = $1 WHERE year_id = $2",
+    const updatedYear = await pool.query(
+      "UPDATE year SET name = $1 WHERE year_id = $2 RETURNING *",
       [updatedName, id]
     );
-    res.json(updateName);
+    res.json(updatedYear);
   } catch (err) {
     console.error(err.message);
   }
 });
 
-// UPDATE VIDEO TITLE AND SUBVERSE BY VIDEO_ID
-app.put("/videos/:id", async (req, res) => {
+// UPDATE VIDEO TITLE BY ID
+app.put("videos/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const updatedTitle = req.body.title;
-    const updatedSubVerse = req.body.sub_verse;
-    const videoUpdate = await pool.query(
-      "UPDATE videos SET title = $1, sub_verse = $2 WHERE videos_id = $3",
-      [updatedTitle, updatedSubVerse, id]
+    const titleUpdate = await pool.query(
+      "UPDATE videos SET title = $1 WHERE video_id = $2 RETURNING *",
+      [updatedTitle, id]
     );
-    res.json(updatedTitle, updatedSubVerse);
+    res.json(titleUpdate);
   } catch (err) {
     console.error(err.message);
   }
 });
 
-// DELETE
+// UPDATE VIDEO SUB_VERSE BY ID
+app.put("videos/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const updatedSubVerse = req.body.sub_verse;
+    const subVerseUpdate = await pool.query(
+      "UPDATE videos SET sub_verse = $1 WHERE video_id = $2 RETURNING *",
+      [updatedSubVerse, Id]
+    );
+    res.json(subVerseUpdate);
+  } catch (err) {
+    console.error(err.message);
+  }
+});
+
+// UPDATE ALL VIDEO FIELDS BY ID
+app.put("/videos/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    console.log(req.body);
+    const updatedTitle = req.body.title;
+    const updatedSubVerse = req.body.sub_verse;
+    const videoUpdate = await pool.query(
+      "UPDATE videos SET title = $1, sub_verse = $2 WHERE videos_id = $3 RETURNING *",
+      [updatedTitle, updatedSubVerse, id]
+    );
+    res.json(videoUpdate);
+  } catch (err) {
+    console.error(err.message);
+  }
+});
+
+// ========== DELETE ==========/
+// DELETE YEAR
+
+// DELETE VIDEOS
 
 app.listen(5000, () => {
   console.log("SERVER RUNNING: 5000");
