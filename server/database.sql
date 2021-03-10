@@ -1,26 +1,27 @@
 -- CREATE DATABASE ccpc;
 
--- CREATE TABLE user (
+-- CREATE TABLE users (
 --   id SERIAL PRIMARY KEY, 
 --   userName text, 
 --   pw text
 -- );
 
-CREATE TABLE year (
-  year_id SERIAL PRIMARY KEY,
+CREATE TABLE years (
+  id SERIAL PRIMARY KEY,
   name integer
 ); 
-  -- id_user integer references user (id)
+  -- user_id integer REFERENCES users (id)
 
 CREATE TABLE videos (
-  videos_id SERIAL PRIMARY KEY, 
+  id SERIAL PRIMARY KEY, 
   title text, 
-  sub_verse text, 
+  verse text, 
   posting_date DATE NOT NULL DEFAULT CURRENT_DATE,
   video_key text,
-  id_year integer references year (id)
+  CONSTRAINT fk_year FOREIGN KEY (year_id) REFERENCES years (id) ON DELETE CASCADE
+  -- year_id integer REFERENCES years (id) ON DELETE CASCADE
 );
-  -- id_user integer references user (id)
+  -- user_id integer REFERENCES users (id)
 
 
 
