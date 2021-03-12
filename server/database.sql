@@ -14,6 +14,7 @@ CREATE TABLE years (
 
 CREATE TABLE videos (
   id SERIAL PRIMARY KEY, 
+  input_date date,
   title text, 
   verse text, 
   posting_date DATE NOT NULL DEFAULT CURRENT_DATE,

@@ -9,8 +9,8 @@ app.use(cors());
 app.use(express.json());
 
 // ========== ROUTES ========== //
-// ========== CREATE ========== //
 
+// ========== CREATE ========== //
 // CREATE YEAR
 app.post("/years", async (req, res) => {
   try {
@@ -28,13 +28,14 @@ app.post("/years", async (req, res) => {
 // CREATE VIDEOS
 app.post("/videos", async (req, res) => {
   try {
+    const input_Date = req.body.input_date;
     const title = req.body.title;
     const verse = req.body.verse;
     const videoKey = req.body.video_key;
     // const fkey = await pool.query("");
     const newVideo = await pool.query(
-      "INSERT INTO videos (title, verse, video_key) VALUES ($1, $2, $3) RETURNING *",
-      [title, verse, videoKey]
+      "INSERT INTO videos (input_date, title, verse, video_key) VALUES ($1, $2, $3, $4) RETURNING *",
+      [input_Date, title, verse, videoKey]
     );
     res.json(newVideo.rows[0]);
   } catch (err) {
@@ -90,30 +91,29 @@ app.get("/videos/:id", async (req, res) => {
 });
 
 // ========== UPDATE ========== //
-
 // UPDATE FOLDER(YEAR) NAME BY ID
-// app.put("/years/:id", async (req, res) => {
-//   try {
-//     const { id } = req.params;
-//     const updatedName = req.body.name;
-//     const updatedYear = await pool.query(
-//       "UPDATE years SET name = $1 WHERE id = $2 RETURNING *",
-//       [updatedName, id]
-//     );
-//     res.json(updatedYear);
-//   } catch (err) {
-//     console.error(err.message);
-//   }
-// });
+app.put("/years/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const folderName = req.body.name;
+    const updateYear = await pool.query(
+      "UPDATE years SET name = $1 WHERE id = $2 RETURNING *",
+      [folderName, id]
+    );
+    res.json(updateYear);
+  } catch (err) {
+    console.error(err.message);
+  }
+});
 
 // UPDATE VIDEO TITLE BY ID // =========== DOES THIS EVEN WORK TO UPDATE A SINGLE FIELD??
 app.put("videos/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const updatedTitle = req.body.title;
+    const updateTitle = req.body.title;
     const titleUpdate = await pool.query(
       "UPDATE videos SET title = $1 WHERE id = $2 RETURNING *",
-      [updatedTitle, id]
+      [updateTitle, id]
     );
     res.json(titleUpdate);
   } catch (err) {
@@ -125,12 +125,27 @@ app.put("videos/:id", async (req, res) => {
 app.put("videos/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const updatedVerse = req.body.verse;
+    const updateVerse = req.body.verse;
     const verseUpdate = await pool.query(
       "UPDATE videos SET verse = $1 WHERE id = $2 RETURNING *",
-      [updatedVerse, id]
+      [updateVerse, id]
     );
     res.json(verseUpdate);
+  } catch (err) {
+    console.error(err.message);
+  }
+});
+
+// UPDATE VIDEO INPUT_DATE BY ID
+app.put("video/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const updateDate = req.body.input_date;
+    const dateUpdate = await pool.query(
+      "UPDATE videos SET input_date = $1 WHERE id = $2 RETURNING *",
+      [updateDate, id]
+    );
+    res.json(dateUpdate);
   } catch (err) {
     console.error(err.message);
   }
@@ -155,12 +170,13 @@ app.put("videos/:id", async (req, res) => {
 app.put("/videos/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const updatedTitle = req.body.title;
-    const updatedVerse = req.body.verse;
-    const updatedFKey = req.body.year_id;
+    const updateTitle = req.body.title;
+    const updateVerse = req.body.verse;
+    const updateDate = req.body.input_date;
+    const updateFKey = req.body.year_id;
     const videoUpdate = await pool.query(
-      "UPDATE videos SET title = $1, verse = $2, year_id = $3 WHERE id = $4 RETURNING *",
-      [updatedTitle, updatedVerse, updatedFKey, id]
+      "UPDATE videos SET title = $1, verse = $2, input_date = $3, year_id = $4 WHERE id = $5 RETURNING *",
+      [updateTitle, updateVerse, updateDate, updateFKey, id]
     );
     res.json(videoUpdate);
   } catch (err) {
