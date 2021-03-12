@@ -1,0 +1,26 @@
+.CCPC__body {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: inherit;
+}
+
+.titles {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+.titles h4 {
+  margin-bottom: 5px;
+  font-weight: 400;
+}
+.titles p {
+  margin: 5px 0 10px 0;
+}
+.titles h1 {
+  margin: 5px 0;
+}
+.titles h3 {
+  margin: 5px 0;
+  font-weight: 400;
+}

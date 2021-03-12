@@ -1,0 +1,26 @@
+.header {
+  background-color: white;
+  border-bottom: 3px outset lightgray;
+  display: flex;
+  height: 15vh;
+  width: 100vw;
+}
+
+/* ===== TITLE ===== */
+.main__title {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: inherit;
+  justify-content: center;
+  width: 30vw;
+}
+.main__title p {
+  margin: 0;
+}
+.main__title p:first-child {
+  font-size: 130%;
+}
+.main__title p:last-child {
+  font-size: 100%;
+}

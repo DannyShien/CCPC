@@ -1,0 +1,20 @@
+.body__navbar {
+  align-items: center;
+  display: flex;
+  height: 25vh;
+  justify-content: space-evenly;
+}
+.navbar__title {
+  color: black;
+  font-size: 115%;
+  text-align: center;
+  text-decoration: none;
+  width: 8%;
+}
+.navbar__title:last-child {
+  width: 6%;
+}
+.navbar__title:hover {
+  font-weight: 700;
+  color: #688d9c;
+}

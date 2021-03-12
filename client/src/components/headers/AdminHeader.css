@@ -1,0 +1,16 @@
+.adminHeader {
+  align-items: center;
+  background-color: white;
+  border-bottom: 3px outset lightgray;
+  display: flex;
+  height: 20vh;
+  justify-content: space-between;
+}
+.adminHeader h1 {
+  padding-left: 4%;
+}
+.logo {
+  height: 75%;
+  padding-right: 4%;
+  width: auto;
+}

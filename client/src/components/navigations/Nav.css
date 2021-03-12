@@ -1,0 +1,27 @@
+.main__navbar {
+  align-items: flex-end;
+  display: flex;
+  flex: auto;
+  justify-content: flex-end;
+  padding-bottom: 5px;
+  width: 50vw;
+}
+.nav__link {
+  color: black;
+  text-decoration: none;
+  margin-right: 10%;
+  text-align: center;
+}
+.nav__link:first-child {
+  width: 20%;
+}
+.nav__link:nth-child(2) {
+  width: 15%;
+}
+.nav__link:last-child {
+  width: 8%;
+}
+.nav__link:hover {
+  font-weight: 700;
+  color: #688d9c;
+}

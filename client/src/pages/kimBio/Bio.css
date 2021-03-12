@@ -1,0 +1,9 @@
+.bio__content p {
+  margin-top: 10px;
+}
+.bio__pic {
+  height: 75%;
+  float: left;
+  margin: 10px;
+  width: auto;
+}
