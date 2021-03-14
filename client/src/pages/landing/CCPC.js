@@ -1,9 +1,18 @@
 import React, { Component } from "react";
 import "./CCPC.css";
 import Divider from "../../assets/Divider.png";
-import Video from "../../components/videoDisplay/Video";
+import VideoPlayer from "../../components/videoDisplay/VideoPlayer";
 
 class CCPC extends Component {
+  state = {};
+
+  // fetch data for videos
+  componentDidMount() {}
+
+  // set data to state
+
+  // pass down to videoplayer component
+
   render() {
     return (
       <>
@@ -17,7 +26,7 @@ class CCPC extends Component {
             <h3>John 20:21-23</h3>
           </div>
 
-          <Video />
+          <VideoPlayer />
         </section>
       </>
     );
