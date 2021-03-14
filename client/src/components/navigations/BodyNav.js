@@ -31,8 +31,8 @@ const BodyNav = ({ kim, statement, vision, contact }) => {
 
       <section className="container">
         <Switch>
-          <Route path={"/about"} component={Bio} />
           <Fragment>
+            <Route exact path={"/about"} component={Bio} />
             <Route path={`${path}/bio`} component={Bio} />
             <Route path={`${path}/statement`} component={MissionStatement} />
             <Route path={`${path}/vision`} component={Vision} />

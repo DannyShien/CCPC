@@ -4,7 +4,7 @@ import CCPC from "../pages/landing/CCPC";
 import Header from "../components/headers/Header";
 
 const About = lazy(() => import("../pages/about/About"));
-const Live = lazy(() => import("../pages/live/Live"));
+const LiveSermons = lazy(() => import("../pages/live/LiveSermons"));
 const Admin = lazy(() => import("../pages/admin/Admin"));
 
 const Routes = () => {
@@ -15,7 +15,7 @@ const Routes = () => {
       <Fragment>
         <Header />
         <Route exact path="/" component={CCPC} />
-        <Route path="/live" component={Live} />
+        <Route path="/livesermons" component={LiveSermons} />
         <Route path="/about" component={About} />
         <Redirect to="/" />
       </Fragment>

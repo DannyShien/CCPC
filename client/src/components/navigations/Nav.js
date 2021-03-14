@@ -3,15 +3,15 @@ import { Link } from "react-router-dom";
 
 import "./Nav.css";
 
-const Navbar = ({ sermons, live, about }) => {
+const Navbar = ({ prevSermons, liveSermons, about }) => {
   return (
     <div className="main__navbar">
       <Link to="/" className="nav__link">
-        {sermons}
+        {prevSermons}
       </Link>
 
-      <Link to="/live" className="nav__link">
-        {live}
+      <Link to="/livesermons" className="nav__link">
+        {liveSermons}
       </Link>
 
       <Link to="/about" className="nav__link">

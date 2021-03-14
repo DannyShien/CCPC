@@ -4,10 +4,6 @@ import { BrowserRouter as Router } from "react-router-dom";
 import Routes from "./routes/Routes";
 
 class App extends Component {
-  state = {
-    adminPath: "/admin",
-  };
-
   render() {
     return (
       <Router>
