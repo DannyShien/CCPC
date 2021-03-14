@@ -14,7 +14,11 @@ const Header = () => {
         <p>Crossings Community</p>
         <p>Presbyterian Church</p>
       </div>
-      <Navbar sermons="Previous Sermons" live="Live Service" about="About" />
+      <Navbar
+        prevSermons="Previous Sermons"
+        liveSermons="Live Sermons"
+        about="About"
+      />
     </div>
   );
 };
