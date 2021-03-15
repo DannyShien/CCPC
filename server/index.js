@@ -14,6 +14,7 @@ app.use(express.json());
 // CREATE YEAR
 app.post("/years", async (req, res) => {
   try {
+    console.log(req.body);
     const { name } = req.body;
     const newYear = await pool.query(
       "INSERT INTO years (name) VALUES($1) RETURNING *",
