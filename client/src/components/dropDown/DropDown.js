@@ -7,18 +7,19 @@ const DropDown = ({
   selectFolders,
   isDisabled,
 }) => {
+  console.log(defaultValue);
   return (
     <>
       <select
         className="dropdown"
-        defaultValue={defaultValue}
+        value={defaultValue}
         onChange={handleOptions}
         disabled={isDisabled}
       >
-        {selectFolders.map((folder, i) => {
+        {selectFolders.map((folder) => {
           return (
-            <option value={folder} key={i}>
-              {folder}
+            <option value={folder.name} key={folder.id}>
+              {folder.name}
             </option>
           );
         })}

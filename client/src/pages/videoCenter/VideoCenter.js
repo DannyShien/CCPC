@@ -73,7 +73,6 @@ class VideoCenter extends Component {
       width: "35%",
     };
     const sectionInput = {
-      // height: "100%",
       height: "2em",
       width: "65%",
     };
@@ -82,13 +81,11 @@ class VideoCenter extends Component {
       width: "12%",
     };
     const uploadBtn = {
-      // height: "85%",
       height: "2em",
       alignSelf: "flex-end",
       width: "65%",
     };
     const editRemoveBtn = {
-      // height: "100%",
       height: "2em",
       width: "45%",
     };
