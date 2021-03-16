@@ -7,7 +7,7 @@ const DropDown = ({
   selectFolders,
   isDisabled,
 }) => {
-  console.log(defaultValue, selectFolders);
+  // console.log(defaultValue, selectFolders);
   return (
     <>
       <select
@@ -17,7 +17,6 @@ const DropDown = ({
         disabled={isDisabled}
       >
         {selectFolders.map((folder, i) => {
-          console.log(folder);
           let name = folder.name;
           let id = folder.year_id;
           return (

@@ -14,7 +14,7 @@ class VideoCenter extends Component {
     verse: "",
     date: "",
     videoId: "",
-    editFolder: "",
+    editName: "",
     defaultOption: "select folder",
     folders: [{ year_id: 0, name: "select folder" }],
     videos: [{ video_id: 0, name: "select folder" }],
@@ -35,7 +35,7 @@ class VideoCenter extends Component {
         folders: [...this.state.folders, ...foldersData],
       });
     } catch (err) {
-      console.log(err.message);
+      console.log(`DB NOT CONNECTED..:`, err.message);
     }
   };
 
@@ -49,7 +49,7 @@ class VideoCenter extends Component {
     e.preventDefault();
     try {
       const name = this.state.folderName;
-      const response = await axios.post(`http://localhost:5000/years`, {
+      await axios.post(`http://localhost:5000/years`, {
         name,
       });
       window.location = "/admin/videocenter";
@@ -76,7 +76,6 @@ class VideoCenter extends Component {
     e.preventDefault();
     try {
       const year_id = this.state.selectedOptionId;
-      // input date is working
       const input_date = this.state.date;
       const title = this.state.title;
       const verse = this.state.verse;
@@ -96,10 +95,29 @@ class VideoCenter extends Component {
     this.reset();
   };
 
+  submitEdit = async (e) => {
+    e.preventDefault();
+    try {
+      const editName = this.state.editName;
+      const year_id = this.state.selectedOptionId;
+      console.log(`edit`, editName, year_id);
+      const response = await axios.put(
+        `http://localhost:5000/years/${year_id}`,
+        {
+          editName,
+        }
+      );
+      window.location = "/admin/videocenter";
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+
   handleSelectedOption = (e) => {
     console.log(e.target.value);
+    let id = parseInt(e.target.value);
     this.setState({
-      selectedOptionId: e.target.value,
+      selectedOptionId: id,
     });
   };
 
@@ -111,7 +129,7 @@ class VideoCenter extends Component {
       verse: "",
       date: "",
       videoId: "",
-      editFolder: "",
+      editName: "",
       isDisabled: true,
     });
   };
@@ -236,7 +254,7 @@ class VideoCenter extends Component {
         {/* ========== EDIT FOLDER/YEAR ========== */}
         <div className="section__edits">
           <p>Edit Folder</p>
-          <form className="videoForm" onSubmit={this.handleSubmit}>
+          <form className="videoForm" onSubmit={this.submitEdit}>
             <label>
               Select Folder
               <DropDown
@@ -249,8 +267,8 @@ class VideoCenter extends Component {
               Edit Folder
               <Input
                 type="text"
-                name="editFolder"
-                value={this.state.editFolder}
+                name="editName"
+                value={this.state.editName}
                 style={sectionInput}
                 handleInput={this.handleInputChange}
               />
