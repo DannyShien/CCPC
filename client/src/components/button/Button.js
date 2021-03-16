@@ -1,10 +1,16 @@
 import React from "react";
 import "./Button.css";
 
-const Button = ({ style, text }) => {
+const Button = ({ style, type, text, handleDelete }) => {
   return (
     <>
-      <input className="button" type="submit" value={text} style={style} />
+      <input
+        className="button"
+        type={type}
+        value={text}
+        style={style}
+        onClick={handleDelete}
+      />
     </>
   );
 };

@@ -80,14 +80,13 @@ class VideoCenter extends Component {
       const title = this.state.title;
       const verse = this.state.verse;
       const video_key = this.state.videoId;
-      const response = await axios.post(`http://localhost:5000/videos`, {
+      await axios.post(`http://localhost:5000/videos`, {
         year_id,
         input_date,
         title,
         verse,
         video_key,
       });
-      console.log(response);
       // window.location = "/admin/videocenter";
     } catch (err) {
       console.error(err.message);
@@ -95,19 +94,26 @@ class VideoCenter extends Component {
     this.reset();
   };
 
-  submitEdit = async (e) => {
+  editFolder = async (e) => {
     e.preventDefault();
     try {
       const editName = this.state.editName;
       const year_id = this.state.selectedOptionId;
-      console.log(`edit`, editName, year_id);
-      const response = await axios.put(
-        `http://localhost:5000/years/${year_id}`,
-        {
-          editName,
-        }
-      );
+      await axios.put(`http://localhost:5000/years/${year_id}`, {
+        editName,
+      });
       window.location = "/admin/videocenter";
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+
+  deleteFolder = async () => {
+    console.log("click delete btn");
+    try {
+      const year_id = this.state.selectedOptionId;
+      console.log(year_id);
+      await axios.delete(`http://localhost:5000/years/${year_id}`);
     } catch (err) {
       console.error(err.message);
     }
@@ -254,7 +260,7 @@ class VideoCenter extends Component {
         {/* ========== EDIT FOLDER/YEAR ========== */}
         <div className="section__edits">
           <p>Edit Folder</p>
-          <form className="videoForm" onSubmit={this.submitEdit}>
+          <form className="videoForm" onSubmit={this.editFolder}>
             <label>
               Select Folder
               <DropDown
@@ -276,7 +282,12 @@ class VideoCenter extends Component {
 
             <div className="btn__container">
               <Button type="submit" text="Edit" style={editRemoveBtn} />
-              <Button type="submit" text="Remove" style={editRemoveBtn} />
+              <Button
+                type="submit"
+                text="Remove"
+                style={editRemoveBtn}
+                handleDelete={this.deleteFolder}
+              />
             </div>
           </form>
         </div>

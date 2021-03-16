@@ -1,5 +1,7 @@
 .button {
   align-items: center;
+  background-color: rgb(215, 215, 215);
+  border: 2px groove rgb(215, 215, 215);
   display: flex;
   font-size: 75%;
   font-weight: 700;

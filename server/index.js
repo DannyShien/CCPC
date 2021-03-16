@@ -2,7 +2,6 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const pool = require("./db");
-app.use(express.json());
 
 // ========== MIDDLEWARE ========== //
 app.use(cors());
@@ -14,7 +13,6 @@ app.use(express.json());
 // CREATE FOLDER
 app.post("/years", async (req, res) => {
   try {
-    console.log(req.body);
     const { name } = req.body;
     const newYear = await pool.query(
       "INSERT INTO years (name) VALUES($1) RETURNING *",
@@ -59,8 +57,6 @@ app.get("/years", async (req, res) => {
 app.get("/years/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    // console.log(req.params);
-    console.log(req.body);
     const yearId = await pool.query("SELECT * FROM years WHERE id = $1", [id]);
     res.json(yearId.rows[0]);
   } catch (err) {
@@ -111,7 +107,6 @@ app.put("/years/:id", async (req, res) => {
 app.put("videos/:id", async (req, res) => {
   try {
     const { id } = req.params;
-
     const updateTitle = req.body.title;
     const titleUpdate = await pool.query(
       "UPDATE videos SET title = $1 WHERE video_id = $2 RETURNING *",
@@ -188,25 +183,29 @@ app.put("/videos/:id", async (req, res) => {
 
 // ========== DELETE ==========/
 // DELETE YEAR
-app.delete("/years:id", async (req, res) => {
+app.delete("/years/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const deleteYear = await pool.query("DELETE FROM years WHERE id = $1", [
-      id,
-    ]);
-    res.json(deleteYear);
+    console.log(`params`, id);
+    const deleteYear = await pool.query(
+      "DELETE FROM years WHERE year_id = $1",
+      [id]
+    );
+    // res.json(deleteYear);
+    res.json(console.log(deleteYear));
   } catch (err) {
     console.error(err.message);
   }
 });
 
 // DELETE VIDEOS
-app.delete("/videos:id", async (req, res) => {
+app.delete("/videos/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const deleteVideo = await pool.query("DELETE FROM videos WHERE id = $1", [
-      id,
-    ]);
+    const deleteVideo = await pool.query(
+      "DELETE FROM videos WHERE video_id = $1",
+      [id]
+    );
     res.json(deleteVideo);
   } catch (err) {
     console.error(err.message);
