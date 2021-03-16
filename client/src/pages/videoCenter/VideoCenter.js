@@ -58,11 +58,25 @@ class VideoCenter extends Component {
     }
     this.reset();
   };
+  // USE THIS METHOD TO DISPLAY TITLE AND VERSE ON CCPC.JS
+  // capitalizeName = (name) => {
+  //   const names = name.split(" ");
+  //   const namesUpper = [];
+
+  //   for (const n of names) {
+  //     // namesUpper.push(n[0].toUpperCase() + n.slice(1));
+  //     namesUpper.push(n.replace(n[0], n[0].toUpperCase()));
+  //   }
+  //   console.log(namesUpper.join(" "));
+  //   return namesUpper.join(" ");
+  //   // console.log(namesUpper);
+  // };
 
   submitNewVideo = async (e) => {
     e.preventDefault();
     try {
       const year_id = this.state.selectedOptionId;
+      // input date is working
       const input_date = this.state.date;
       const title = this.state.title;
       const verse = this.state.verse;
@@ -98,9 +112,7 @@ class VideoCenter extends Component {
       date: "",
       videoId: "",
       editFolder: "",
-      // defaultOption: "select folder",
       isDisabled: true,
-      // defaultOpt: "select folder",
     });
   };
 
@@ -175,7 +187,7 @@ class VideoCenter extends Component {
             <label>
               Date
               <Input
-                type="date"
+                type="text"
                 name="date"
                 value={this.state.date}
                 placeholder="yyyy-mm-dd"

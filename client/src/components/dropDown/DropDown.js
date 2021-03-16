@@ -12,7 +12,7 @@ const DropDown = ({
     <>
       <select
         className="dropdown"
-        value={defaultValue}
+        value={selectFolders[0].name}
         onChange={handleOptions}
         disabled={isDisabled}
       >
