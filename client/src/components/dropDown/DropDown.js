@@ -16,7 +16,7 @@ const DropDown = ({
         onChange={handleOptions}
         disabled={isDisabled}
       >
-        {selectFolders.map((folder) => {
+        {selectFolders.map((folder, i) => {
           console.log(folder);
           let name = folder.name;
           let id = folder.year_id;

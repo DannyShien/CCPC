@@ -15,10 +15,9 @@ class VideoCenter extends Component {
     date: "",
     videoId: "",
     editFolder: "",
-    editVideo: "",
     defaultOption: "select folder",
-    folders: ["select folder", "folder1", "folder2", "folder3"],
-    videos: ["select video", "video1", "video2", "video3"],
+    folders: [{ year_id: 0, name: "select folder" }],
+    videos: [{ video_id: 0, name: "select folder" }],
     isDisabled: true,
     defaultOpt: "select folder",
   };
@@ -31,14 +30,16 @@ class VideoCenter extends Component {
     try {
       const response = await axios.get("http://localhost:5000/years");
       console.log(response);
-      const folders = response.data;
-      this.setState({ folders });
+      const foldersData = response.data;
+      this.setState({
+        folders: [...this.state.folders, ...foldersData],
+      });
     } catch (err) {
       console.log(err.message);
     }
   };
 
-  handleInput = (e) => {
+  handleInputChange = (e) => {
     this.setState({
       [e.target.name]: e.target.value,
     });
@@ -97,10 +98,9 @@ class VideoCenter extends Component {
       date: "",
       videoId: "",
       editFolder: "",
-      editVideo: "",
-      defaultOption: "select folder",
+      // defaultOption: "select folder",
       isDisabled: true,
-      defaultOpt: "select folder",
+      // defaultOpt: "select folder",
     });
   };
 
@@ -112,6 +112,7 @@ class VideoCenter extends Component {
   };
 
   render() {
+    // refactor these values into the component..
     const createInput = {
       height: "2em",
       width: "35%",
@@ -153,7 +154,7 @@ class VideoCenter extends Component {
               name="folderName"
               value={this.state.folderName}
               style={createInput}
-              handleInput={this.handleInput}
+              handleInput={this.handleInputChange}
             />
             <Button type="submit" text="Create Folder" style={createBtn} />
           </form>
@@ -180,7 +181,7 @@ class VideoCenter extends Component {
                 placeholder="yyyy-mm-dd"
                 required
                 style={sectionInput}
-                handleInput={this.handleInput}
+                handleInput={this.handleInputChange}
               />
             </label>
             <label>
@@ -191,7 +192,7 @@ class VideoCenter extends Component {
                 value={this.state.title}
                 required
                 style={sectionInput}
-                handleInput={this.handleInput}
+                handleInput={this.handleInputChange}
               />
             </label>
             <label>
@@ -202,7 +203,7 @@ class VideoCenter extends Component {
                 value={this.state.verse}
                 required
                 style={sectionInput}
-                handleInput={this.handleInput}
+                handleInput={this.handleInputChange}
               />
             </label>
             <label>
@@ -213,7 +214,7 @@ class VideoCenter extends Component {
                 value={this.state.videoId}
                 required
                 style={sectionInput}
-                handleInput={this.handleInput}
+                handleInput={this.handleInputChange}
               />
             </label>
             <Button type="submit" text="Upload" style={uploadBtn} />
@@ -239,7 +240,7 @@ class VideoCenter extends Component {
                 name="editFolder"
                 value={this.state.editFolder}
                 style={sectionInput}
-                handleInput={this.handleInput}
+                handleInput={this.handleInputChange}
               />
             </label>
 
@@ -283,7 +284,7 @@ class VideoCenter extends Component {
                 value={this.state.date}
                 required
                 style={sectionInput}
-                handleInput={this.handleInput}
+                handleInput={this.handleInputChange}
               />
             </label>
             <label>
@@ -294,7 +295,7 @@ class VideoCenter extends Component {
                 value={this.state.title}
                 required
                 style={sectionInput}
-                handleInput={this.handleInput}
+                handleInput={this.handleInputChange}
               />
             </label>
             <label>
@@ -305,7 +306,7 @@ class VideoCenter extends Component {
                 value={this.state.verse}
                 required
                 style={sectionInput}
-                handleInput={this.handleInput}
+                handleInput={this.handleInputChange}
               />
             </label>
 
