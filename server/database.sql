@@ -7,21 +7,22 @@
 -- );
 
 CREATE TABLE years (
-  id SERIAL PRIMARY KEY,
+  year_id SERIAL PRIMARY KEY,
   name integer
 ); 
   -- user_id integer REFERENCES users (id)
 
 CREATE TABLE videos (
-  id SERIAL PRIMARY KEY, 
+  video_id SERIAL PRIMARY KEY, 
   input_date date,
   title text, 
   verse text, 
   posting_date DATE NOT NULL DEFAULT CURRENT_DATE,
   video_key text,
-  CONSTRAINT fk_year FOREIGN KEY (year_id) REFERENCES years (id) ON DELETE CASCADE
-  -- year_id integer REFERENCES years (id) ON DELETE CASCADE
+  year_id integer REFERENCES years (year_id) ON DELETE CASCADE
 );
+  -- year_id int,
+  -- CONSTRAINT fk_year FOREIGN KEY (year_id) REFERENCES years (year_id) ON DELETE CASCADE
   -- user_id integer REFERENCES users (id)
 
 

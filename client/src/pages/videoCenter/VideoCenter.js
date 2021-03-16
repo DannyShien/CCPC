@@ -4,10 +4,12 @@ import "./VideoCenter.css";
 import Input from "../../components/inputField/InputField";
 import Button from "../../components/button/Button";
 import DropDown from "../../components/dropDown/DropDown";
+import axios from "axios";
 
 class VideoCenter extends Component {
   state = {
     folderName: "",
+    selectedOptionId: 0,
     title: "",
     verse: "",
     date: "",
@@ -15,10 +17,25 @@ class VideoCenter extends Component {
     editFolder: "",
     editVideo: "",
     defaultOption: "select folder",
-    selectFolders: ["select folder", "folder1", "folder2", "folder3"],
-    selectVideos: ["select video", "video1", "video2", "video3"],
+    folders: ["select folder", "folder1", "folder2", "folder3"],
+    videos: ["select video", "video1", "video2", "video3"],
     isDisabled: true,
     defaultOpt: "select folder",
+  };
+
+  componentDidMount() {
+    this.requestYearsFolder();
+  }
+
+  requestYearsFolder = async () => {
+    try {
+      const response = await axios.get("http://localhost:5000/years");
+      console.log(response);
+      const folders = response.data;
+      this.setState({ folders });
+    } catch (err) {
+      console.log(err.message);
+    }
   };
 
   handleInput = (e) => {
@@ -27,21 +44,54 @@ class VideoCenter extends Component {
     });
   };
 
-  handleSubmit = (e) => {
+  submitNewFolder = async (e) => {
     e.preventDefault();
-    console.log(
-      `Submit:`,
-      this.state.defaultOption,
-      this.state.title,
-      this.state.videoId
-    );
-    // Does something here and submits to backend..
+    try {
+      const name = this.state.folderName;
+      const response = await axios.post(`http://localhost:5000/years`, {
+        name,
+      });
+      window.location = "/admin/videocenter";
+    } catch (err) {
+      console.error(err.message);
+    }
     this.reset();
+  };
+
+  submitNewVideo = async (e) => {
+    e.preventDefault();
+    try {
+      const year_id = this.state.selectedOptionId;
+      const input_date = this.state.date;
+      const title = this.state.title;
+      const verse = this.state.verse;
+      const video_key = this.state.videoId;
+      const response = await axios.post(`http://localhost:5000/videos`, {
+        year_id,
+        input_date,
+        title,
+        verse,
+        video_key,
+      });
+      console.log(response);
+      // window.location = "/admin/videocenter";
+    } catch (err) {
+      console.error(err.message);
+    }
+    this.reset();
+  };
+
+  handleSelectedOption = (e) => {
+    console.log(e.target.value);
+    this.setState({
+      selectedOptionId: e.target.value,
+    });
   };
 
   reset = () => {
     this.setState({
       folderName: "",
+      selectedOptionId: 0,
       title: "",
       verse: "",
       date: "",
@@ -51,12 +101,6 @@ class VideoCenter extends Component {
       defaultOption: "select folder",
       isDisabled: true,
       defaultOpt: "select folder",
-    });
-  };
-
-  handleDefaultOptions = (e) => {
-    this.setState({
-      defaultOption: e.target.value,
     });
   };
 
@@ -92,8 +136,8 @@ class VideoCenter extends Component {
 
     const {
       defaultOption,
-      selectFolders,
-      selectVideos,
+      folders,
+      videos,
       defaultOpt,
       isDisabled,
     } = this.state;
@@ -102,7 +146,7 @@ class VideoCenter extends Component {
       <>
         {/* ========= CREATE FOLDER/YEAR ========== */}
         <div className="create__folder">
-          <form className="videoCenterForm" onSubmit={this.handleSubmit}>
+          <form className="videoCenterForm" onSubmit={this.submitNewFolder}>
             <label>Create Folder</label>
             <Input
               type="text"
@@ -118,21 +162,22 @@ class VideoCenter extends Component {
         {/* ========== UPLOAD VIDEO ========== */}
         <div className="section__edits">
           <p>Upload Video</p>
-          <form className="videoForm" onSubmit={this.handleSubmit}>
+          <form className="videoForm" onSubmit={this.submitNewVideo}>
             <label>
               Select Folder
               <DropDown
                 defaultValue={defaultOption}
-                handleOptions={this.handleDefaultOptions}
-                selectFolders={selectFolders}
+                handleOptions={this.handleSelectedOption}
+                selectFolders={folders}
               />
             </label>
             <label>
               Date
               <Input
-                type="text"
+                type="date"
                 name="date"
                 value={this.state.date}
+                placeholder="yyyy-mm-dd"
                 required
                 style={sectionInput}
                 handleInput={this.handleInput}
@@ -183,8 +228,8 @@ class VideoCenter extends Component {
               Select Folder
               <DropDown
                 defaultValue={defaultOption}
-                handleOptions={this.handleDefaultOptions}
-                selectFolders={selectFolders}
+                handleOptions={this.handleSelectedOption}
+                selectFolders={folders}
               />
             </label>
             <label>
@@ -214,7 +259,7 @@ class VideoCenter extends Component {
               <DropDown
                 defaultValue={defaultOption}
                 handleOptions={this.handleOption}
-                selectFolders={selectFolders}
+                selectFolders={folders}
               />
             </label>
 
@@ -224,7 +269,7 @@ class VideoCenter extends Component {
                 <DropDown
                   defaultValue={defaultOpt}
                   handleOptions={this.handleOption}
-                  selectFolders={selectVideos}
+                  selectFolders={videos}
                   isDisabled={isDisabled}
                 />
               </label>

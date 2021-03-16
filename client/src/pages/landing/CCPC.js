@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import "./CCPC.css";
 import Divider from "../../assets/Divider.png";
-import VideoPlayer from "../../components/videoDisplay/VideoPlayer";
 import axios from "axios";
+import VideoPlayer from "../../components/videoDisplay/VideoPlayer";
 import DropDown from "../../components/dropDown/DropDown";
 import Button from "../../components/button/Button";
 

@@ -11,7 +11,7 @@ app.use(express.json());
 // ========== ROUTES ========== //
 
 // ========== CREATE ========== //
-// CREATE YEAR
+// CREATE FOLDER
 app.post("/years", async (req, res) => {
   try {
     console.log(req.body);
@@ -29,14 +29,14 @@ app.post("/years", async (req, res) => {
 // CREATE VIDEOS
 app.post("/videos", async (req, res) => {
   try {
-    const input_Date = req.body.input_date;
+    const input_date = req.body.input_date;
     const title = req.body.title;
     const verse = req.body.verse;
-    const videoKey = req.body.video_key;
-    // const fkey = await pool.query("");
+    const video_key = req.body.video_key;
+    const year_id = req.body.year_id;
     const newVideo = await pool.query(
-      "INSERT INTO videos (input_date, title, verse, video_key) VALUES ($1, $2, $3, $4) RETURNING *",
-      [input_Date, title, verse, videoKey]
+      "INSERT INTO videos (input_date, title, verse, video_key, year_id ) VALUES ($1, $2, $3, $4, $5) RETURNING *",
+      [input_date, title, verse, video_key, year_id]
     );
     res.json(newVideo.rows[0]);
   } catch (err) {
@@ -174,7 +174,7 @@ app.put("/videos/:id", async (req, res) => {
     const updateTitle = req.body.title;
     const updateVerse = req.body.verse;
     const updateDate = req.body.input_date;
-    const updateFKey = req.body.year_id;
+    // const updateFKey = req.body.year_id;
     const videoUpdate = await pool.query(
       "UPDATE videos SET title = $1, verse = $2, input_date = $3, year_id = $4 WHERE id = $5 RETURNING *",
       [updateTitle, updateVerse, updateDate, updateFKey, id]
