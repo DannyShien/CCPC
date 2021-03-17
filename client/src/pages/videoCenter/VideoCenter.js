@@ -45,6 +45,24 @@ class VideoCenter extends Component {
     });
   };
 
+  handleSelectedOption = (e) => {
+    console.log(e.target.value);
+    let id = parseInt(e.target.value);
+    // this.setState({
+    // });
+    this.setState({
+      selectedOptionId: id,
+      defaultOption: e.target.value,
+    });
+  };
+
+  handleOption = (e) => {
+    this.setState({
+      defaultOpt: e.target.value,
+      isDisabled: false,
+    });
+  };
+
   submitNewFolder = async (e) => {
     e.preventDefault();
     try {
@@ -96,6 +114,7 @@ class VideoCenter extends Component {
 
   editFolder = async (e) => {
     e.preventDefault();
+
     try {
       const editName = this.state.editName;
       const year_id = this.state.selectedOptionId;
@@ -119,14 +138,6 @@ class VideoCenter extends Component {
     }
   };
 
-  handleSelectedOption = (e) => {
-    console.log(e.target.value);
-    let id = parseInt(e.target.value);
-    this.setState({
-      selectedOptionId: id,
-    });
-  };
-
   reset = () => {
     this.setState({
       folderName: "",
@@ -140,37 +151,7 @@ class VideoCenter extends Component {
     });
   };
 
-  handleOption = (e) => {
-    this.setState({
-      defaultOpt: e.target.value,
-      isDisabled: false,
-    });
-  };
-
   render() {
-    // refactor these values into the component..
-    const createInput = {
-      height: "2em",
-      width: "35%",
-    };
-    const sectionInput = {
-      height: "2em",
-      width: "65%",
-    };
-    const createBtn = {
-      height: "2em",
-      width: "12%",
-    };
-    const uploadBtn = {
-      height: "2em",
-      alignSelf: "flex-end",
-      width: "65%",
-    };
-    const editRemoveBtn = {
-      height: "2em",
-      width: "45%",
-    };
-
     const {
       defaultOption,
       folders,
@@ -189,10 +170,14 @@ class VideoCenter extends Component {
               type="text"
               name="folderName"
               value={this.state.folderName}
-              style={createInput}
+              style={{ width: "35%" }}
               handleInput={this.handleInputChange}
             />
-            <Button type="submit" text="Create Folder" style={createBtn} />
+            <Button
+              type="submit"
+              text="Create Folder"
+              style={{ width: "12%" }}
+            />
           </form>
         </div>
 
@@ -216,7 +201,7 @@ class VideoCenter extends Component {
                 value={this.state.date}
                 placeholder="yyyy-mm-dd"
                 required
-                style={sectionInput}
+                style={{ width: "65%" }}
                 handleInput={this.handleInputChange}
               />
             </label>
@@ -227,7 +212,7 @@ class VideoCenter extends Component {
                 name="title"
                 value={this.state.title}
                 required
-                style={sectionInput}
+                style={{ width: "65%" }}
                 handleInput={this.handleInputChange}
               />
             </label>
@@ -238,7 +223,7 @@ class VideoCenter extends Component {
                 name="verse"
                 value={this.state.verse}
                 required
-                style={sectionInput}
+                style={{ width: "65%" }}
                 handleInput={this.handleInputChange}
               />
             </label>
@@ -249,11 +234,15 @@ class VideoCenter extends Component {
                 name="videoId"
                 value={this.state.videoId}
                 required
-                style={sectionInput}
+                style={{ width: "65%" }}
                 handleInput={this.handleInputChange}
               />
             </label>
-            <Button type="submit" text="Upload" style={uploadBtn} />
+            <Button
+              type="submit"
+              text="Upload"
+              style={{ alignSelf: "flex-end", width: "65%" }}
+            />
           </form>
         </div>
 
@@ -275,17 +264,17 @@ class VideoCenter extends Component {
                 type="text"
                 name="editName"
                 value={this.state.editName}
-                style={sectionInput}
+                style={{ width: "65%" }}
                 handleInput={this.handleInputChange}
               />
             </label>
 
             <div className="btn__container">
-              <Button type="submit" text="Edit" style={editRemoveBtn} />
+              <Button type="submit" text="Edit" style={{ width: "45%" }} />
               <Button
                 type="submit"
                 text="Remove"
-                style={editRemoveBtn}
+                style={{ width: "45%" }}
                 handleDelete={this.deleteFolder}
               />
             </div>
@@ -324,7 +313,7 @@ class VideoCenter extends Component {
                 name="date"
                 value={this.state.date}
                 required
-                style={sectionInput}
+                style={{ width: "65%" }}
                 handleInput={this.handleInputChange}
               />
             </label>
@@ -335,7 +324,7 @@ class VideoCenter extends Component {
                 name="title"
                 value={this.state.title}
                 required
-                style={sectionInput}
+                style={{ width: "65%" }}
                 handleInput={this.handleInputChange}
               />
             </label>
@@ -346,14 +335,14 @@ class VideoCenter extends Component {
                 name="verse"
                 value={this.state.verse}
                 required
-                style={sectionInput}
+                style={{ width: "65%" }}
                 handleInput={this.handleInputChange}
               />
             </label>
 
             <div className="btn__container">
-              <Button type="submit" text="Edit" style={editRemoveBtn} />
-              <Button type="submit" text="Remove" style={editRemoveBtn} />
+              <Button type="submit" text="Edit" style={{ width: "45%" }} />
+              <Button type="submit" text="Remove" style={{ width: "45%" }} />
             </div>
           </form>
         </div>
