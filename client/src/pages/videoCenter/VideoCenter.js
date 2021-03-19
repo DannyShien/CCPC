@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./VideoCenter.css";
 import CreateFolder from "../../components/createFolder/CreateFolder";
 import UploadVideo from "../../components/uploadVideo/UploadVideo";
+import EditFolder from "../../components/editFolder/EditFolder";
 import Input from "../../components/input/Input";
 import Button from "../../components/button/Button";
 import DropDown from "../../components/dropDown/DropDown";
@@ -139,30 +140,6 @@ class VideoCenter extends Component {
   //   this.reset();
   // };
 
-  editFolder = async (e) => {
-    e.preventDefault();
-    try {
-      const editName = this.state.editName;
-      const year_id = this.state.selectedOptionId;
-      await axios.put(`http://localhost:5000/years/${year_id}`, {
-        editName,
-      });
-      window.location = "/admin/videocenter";
-    } catch (err) {
-      console.error(err.message);
-    }
-  };
-
-  deleteFolder = async () => {
-    try {
-      const year_id = this.state.selectedOptionId;
-      console.log(year_id);
-      await axios.delete(`http://localhost:5000/years/${year_id}`);
-    } catch (err) {
-      console.error(err.message);
-    }
-  };
-
   editVideo = async (e) => {
     e.preventDefault();
   };
@@ -207,52 +184,13 @@ class VideoCenter extends Component {
         {/* ========== UPLOAD VIDEO ========== */}
         <div className="form_section">
           <p>Upload Video</p>
-          <UploadVideo
-            // submitNewVideo={this.submitNewVideo}
-            // defaultFolder={defaultFolder}
-            // handleFolderOption={this.handleFolderOption}
-            folders={folders}
-            // date={this.state.date}
-            // title={this.state.title}
-            // verse={this.state.verse}
-            // videoId={this.state.videoId}
-            // handleInputChange={this.handleInputChange}
-          />
+          <UploadVideo folders={folders} />
         </div>
 
         {/* ========== EDIT FOLDER/YEAR ========== */}
         <div className="form_section">
           <p>Edit Folder</p>
-          <form className="form" onSubmit={this.editFolder}>
-            <label>
-              Select Folder
-              <DropDown
-                defaultValue={defaultFolder}
-                handleOptions={this.handleFolderOption}
-                selectFolders={folders}
-              />
-            </label>
-            <label>
-              Edit Folder
-              <Input
-                type="text"
-                name="editName"
-                value={this.state.editName}
-                style={{ width: "65%" }}
-                handleInput={this.handleInputChange}
-              />
-            </label>
-
-            <div className="btn__container">
-              <Button type="submit" text="Edit" style={{ width: "45%" }} />
-              <Button
-                type="submit"
-                text="Remove"
-                style={{ width: "45%" }}
-                handleDelete={this.deleteFolder}
-              />
-            </div>
-          </form>
+          <EditFolder folders={folders} />
         </div>
 
         {/* ========== EDIT VIDEO ========== */}

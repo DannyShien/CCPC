@@ -7,12 +7,11 @@ const DropDown = ({
   selectFolders,
   isDisabled,
 }) => {
-  console.log(selectFolders);
+  // console.log(selectFolders);
   return (
     <>
       <select
         className="dropdown"
-        // value={selectFolders[0].name}
         value={defaultValue}
         onChange={handleOptions}
         disabled={isDisabled}

@@ -63,15 +63,16 @@ class UploadVideo extends Component {
   };
 
   render() {
+    const { defaultFolder, date, title, verse, videoId } = this.state;
     const { folders } = this.props;
-    console.log(folders);
+
     return (
       <>
         <form className="form" onSubmit={this.submitNewVideo}>
           <label>
             Select Folder
             <DropDown
-              defaultValue={this.state.defaultFolder}
+              defaultValue={defaultFolder}
               handleOptions={this.handleFolderOption}
               selectFolders={folders}
             />
@@ -81,7 +82,7 @@ class UploadVideo extends Component {
             <Input
               type="text"
               name="date"
-              value={this.state.date}
+              value={date}
               placeholder="dd-mm-yyy"
               required
               style={{ width: "65%" }}
@@ -93,7 +94,7 @@ class UploadVideo extends Component {
             <Input
               type="text"
               name="title"
-              value={this.state.title}
+              value={title}
               required
               style={{ width: "65%" }}
               handleInput={this.handleInputChange}
@@ -104,7 +105,7 @@ class UploadVideo extends Component {
             <Input
               type="text"
               name="verse"
-              value={this.state.verse}
+              value={verse}
               required
               style={{ width: "65%" }}
               handleInput={this.handleInputChange}
@@ -115,7 +116,7 @@ class UploadVideo extends Component {
             <Input
               type="text"
               name="videoId"
-              value={this.state.videoId}
+              value={videoId}
               required
               style={{ width: "65%" }}
               handleInput={this.handleInputChange}
