@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./VideoCenter.css";
 import CreateFolder from "../../components/createFolder/CreateFolder";
+import UploadVideo from "../../components/uploadVideo/UploadVideo";
 import Input from "../../components/input/Input";
 import Button from "../../components/button/Button";
 import DropDown from "../../components/dropDown/DropDown";
@@ -99,6 +100,8 @@ class VideoCenter extends Component {
     }
     this.reset();
   };
+
+  // ========================================================= //
   // USE THIS METHOD TO DISPLAY TITLE AND VERSE ON CCPC.JS
   // capitalizeName = (name) => {
   //   const names = name.split(" ");
@@ -112,28 +115,29 @@ class VideoCenter extends Component {
   //   return namesUpper.join(" ");
   //   // console.log(namesUpper);
   // };
+  // ========================================================= //
 
-  submitNewVideo = async (e) => {
-    e.preventDefault();
-    try {
-      const year_id = this.state.selectedOptionId;
-      const input_date = this.state.date;
-      const title = this.state.title;
-      const verse = this.state.verse;
-      const video_key = this.state.videoId;
-      await axios.post(`http://localhost:5000/videos`, {
-        year_id,
-        input_date,
-        title,
-        verse,
-        video_key,
-      });
-      // window.location = "/admin/videocenter";
-    } catch (err) {
-      console.error(err.message);
-    }
-    this.reset();
-  };
+  // submitNewVideo = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     const year_id = this.state.selectedOptionId;
+  //     const input_date = this.state.date;
+  //     const title = this.state.title;
+  //     const verse = this.state.verse;
+  //     const video_key = this.state.videoId;
+  //     await axios.post(`http://localhost:5000/videos`, {
+  //       year_id,
+  //       input_date,
+  //       title,
+  //       verse,
+  //       video_key,
+  //     });
+  //     // window.location = "/admin/videocenter";
+  //   } catch (err) {
+  //     console.error(err.message);
+  //   }
+  //   this.reset();
+  // };
 
   editFolder = async (e) => {
     e.preventDefault();
@@ -188,7 +192,7 @@ class VideoCenter extends Component {
       defaultVideo,
       isDisabled,
     } = this.state;
-    console.log(videos);
+    console.log(folders);
     return (
       <>
         {/* ========= CREATE FOLDER/YEAR ========== */}
@@ -201,74 +205,25 @@ class VideoCenter extends Component {
         </div>
 
         {/* ========== UPLOAD VIDEO ========== */}
-        <div className="section__edits">
+        <div className="form_section">
           <p>Upload Video</p>
-          <form className="videoForm" onSubmit={this.submitNewVideo}>
-            <label>
-              Select Folder
-              <DropDown
-                defaultValue={defaultFolder}
-                handleOptions={this.handleFolderOption}
-                selectFolders={folders}
-              />
-            </label>
-            <label>
-              Date
-              <Input
-                // type="text"
-                name="date"
-                value={this.state.date}
-                placeholder="dd-mm-yyy"
-                required
-                style={{ width: "65%" }}
-                handleInput={this.handleInputChange}
-              />
-            </label>
-            <label>
-              Title
-              <Input
-                type="text"
-                name="title"
-                value={this.state.title}
-                required
-                style={{ width: "65%" }}
-                handleInput={this.handleInputChange}
-              />
-            </label>
-            <label>
-              Verse
-              <Input
-                type="text"
-                name="verse"
-                value={this.state.verse}
-                required
-                style={{ width: "65%" }}
-                handleInput={this.handleInputChange}
-              />
-            </label>
-            <label>
-              Video ID
-              <Input
-                type="text"
-                name="videoId"
-                value={this.state.videoId}
-                required
-                style={{ width: "65%" }}
-                handleInput={this.handleInputChange}
-              />
-            </label>
-            <Button
-              type="submit"
-              text="Upload"
-              style={{ alignSelf: "flex-end", width: "65%" }}
-            />
-          </form>
+          <UploadVideo
+            // submitNewVideo={this.submitNewVideo}
+            // defaultFolder={defaultFolder}
+            // handleFolderOption={this.handleFolderOption}
+            folders={folders}
+            // date={this.state.date}
+            // title={this.state.title}
+            // verse={this.state.verse}
+            // videoId={this.state.videoId}
+            // handleInputChange={this.handleInputChange}
+          />
         </div>
 
         {/* ========== EDIT FOLDER/YEAR ========== */}
-        <div className="section__edits">
+        <div className="form_section">
           <p>Edit Folder</p>
-          <form className="videoForm" onSubmit={this.editFolder}>
+          <form className="form" onSubmit={this.editFolder}>
             <label>
               Select Folder
               <DropDown
@@ -301,9 +256,9 @@ class VideoCenter extends Component {
         </div>
 
         {/* ========== EDIT VIDEO ========== */}
-        <div className="section__edits">
+        <div className="form_section">
           <p>Edit Video</p>
-          <form className="videoForm" onSubmit={this.editVideo}>
+          <form className="form" onSubmit={this.editVideo}>
             <label>
               Select Folder
               <DropDown

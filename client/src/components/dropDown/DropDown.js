@@ -7,7 +7,7 @@ const DropDown = ({
   selectFolders,
   isDisabled,
 }) => {
-  console.log(defaultValue, selectFolders);
+  console.log(selectFolders);
   return (
     <>
       <select

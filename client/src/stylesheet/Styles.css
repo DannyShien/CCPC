@@ -55,13 +55,18 @@ code {
   font-weight: 400;
 }
 
-/* === FORM SECTIONS ===
-.section__edits {
+/* === FORM SECTIONS === */
+.form {
+  align-self: center;
   display: flex;
   flex-direction: column;
-  height: 16em;
-  width: inherit;
+  height: 14em;
+  justify-content: space-around;
+  width: 40%;
 }
-.section__edits p {
-  margin: 0 0 0 7%;
-} */
+.form label {
+  align-items: center;
+  display: flex;
+  height: 15%;
+  justify-content: space-between;
+}

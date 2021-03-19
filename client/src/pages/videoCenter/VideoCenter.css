@@ -6,29 +6,12 @@
   justify-content: space-around;
   width: 100%;
 }
-.section__edits {
+.form_section {
   display: flex;
   flex-direction: column;
   height: 16em;
   width: inherit;
 }
-.section__edits p {
+.form_section p {
   margin: 0 0 0 7%;
-}
-
-/* ================================== */
-
-.videoForm {
-  align-self: center;
-  display: flex;
-  flex-direction: column;
-  height: 14em;
-  justify-content: space-around;
-  width: 40%;
-}
-.videoForm label {
-  align-items: center;
-  display: flex;
-  height: 15%;
-  justify-content: space-between;
 }
