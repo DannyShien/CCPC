@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "../../stylesheet/Styles.css";
 import "./LiveVideo.css";
-import Input from "../../components/inputField/InputField";
+import Input from "../../components/input/Input";
 import Button from "../../components/button/Button";
 
 class LiveVideo extends Component {

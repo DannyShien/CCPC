@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import "../../stylesheet/Styles.css";
 import "./VideoCenter.css";
-import Input from "../../components/inputField/InputField";
+import CreateFolder from "../../components/createFolder/CreateFolder";
+import Input from "../../components/input/Input";
 import Button from "../../components/button/Button";
 import DropDown from "../../components/dropDown/DropDown";
 import axios from "axios";
@@ -193,22 +193,11 @@ class VideoCenter extends Component {
       <>
         {/* ========= CREATE FOLDER/YEAR ========== */}
         <div className="create__folder">
-          <form className="videoCenterForm" onSubmit={this.submitNewFolder}>
-            <label htmlFor="create">Create Folder</label>
-            <Input
-              type="text"
-              formId="create"
-              name="folderName"
-              value={this.state.folderName}
-              style={{ width: "35%" }}
-              handleInput={this.handleInputChange}
-            />
-            <Button
-              type="submit"
-              text="Create Folder"
-              style={{ width: "12%" }}
-            />
-          </form>
+          <CreateFolder
+            submitNewFolder={this.submitNewFolder}
+            folderName={this.state.folderName}
+            handleInputChange={this.handleInputChange}
+          />
         </div>
 
         {/* ========== UPLOAD VIDEO ========== */}

@@ -55,7 +55,7 @@ code {
   font-weight: 400;
 }
 
-/* === FORM SECTIONS === */
+/* === FORM SECTIONS ===
 .section__edits {
   display: flex;
   flex-direction: column;
@@ -64,4 +64,4 @@ code {
 }
 .section__edits p {
   margin: 0 0 0 7%;
-}
+} */

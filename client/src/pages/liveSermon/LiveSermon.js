@@ -2,7 +2,7 @@ import React from "react";
 import Divider from "../../assets/Divider.png";
 import VideoPlayer from "../../components/videoDisplay/VideoPlayer";
 
-const LiveSermons = () => {
+const LiveSermon = () => {
   return (
     <>
       <section className="CCPC__body">
@@ -21,4 +21,4 @@ const LiveSermons = () => {
   );
 };
 
-export default LiveSermons;
+export default LiveSermon;

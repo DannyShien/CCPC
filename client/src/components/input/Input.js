@@ -1,6 +1,6 @@
 import React from "react";
-import "./InputField.css";
-const InputField = ({
+import "./Input.css";
+const Input = ({
   type,
   name,
   formId,
@@ -25,4 +25,4 @@ const InputField = ({
   );
 };
 
-export default InputField;
+export default Input;
