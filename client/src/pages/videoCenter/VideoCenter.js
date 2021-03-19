@@ -15,24 +15,34 @@ class VideoCenter extends Component {
     date: "",
     videoId: "",
     editName: "",
-    defaultOption: "select folder",
+    defaultFolder: "select folder",
     folders: [{ year_id: 0, name: "select folder" }],
-    videos: [{ video_id: 0, name: "select folder" }],
+    defaultVideo: "select folder",
+    videos: [{ video_id: 0, title: "select folder" }],
     isDisabled: true,
-    defaultOpt: "select folder",
   };
 
   componentDidMount() {
-    this.requestYearsFolder();
+    this.requestInitialData();
   }
 
-  requestYearsFolder = async () => {
+  requestInitialData = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/years");
-      console.log(response);
-      const foldersData = response.data;
+      const yearsUrl = "http://localhost:5000/years";
+      const videosUrl = "http://localhost:5000/videos";
+      const yearsRequest = await axios.get(yearsUrl);
+      const vidieoRequest = await axios.get(videosUrl);
+      const initialData = await Promise.all([yearsRequest, vidieoRequest]).then(
+        (res) => {
+          return res;
+        }
+      );
+      let foldersData = initialData[0].data;
+      let videosData = initialData[1].data;
+
       this.setState({
         folders: [...this.state.folders, ...foldersData],
+        videos: [...this.state.videos, ...videosData],
       });
     } catch (err) {
       console.log(`DB NOT CONNECTED..:`, err.message);
@@ -45,22 +55,35 @@ class VideoCenter extends Component {
     });
   };
 
-  handleSelectedOption = (e) => {
-    console.log(e.target.value);
+  handleFolderOption = (e) => {
+    console.log("FOLDER ID: ", e.target.value);
     let id = parseInt(e.target.value);
-    // this.setState({
-    // });
     this.setState({
       selectedOptionId: id,
-      defaultOption: e.target.value,
+      defaultFolder: e.target.value,
     });
   };
 
-  handleOption = (e) => {
+  handleVideoOption = (e) => {
+    // This method does not display the selected folder nor video folder...??
+    console.log("VIDEO ID: ", e.target.value);
+    let id = parseInt(e.target.value);
+    const videos = this.state.videos;
+    let defaultVid = videos.filter((video) => video.video_id === 0);
+    let filteredVideoData = videos
+      .filter((video) => video.year_id === id)
+      .map((video) => {
+        return video;
+      });
+
     this.setState({
-      defaultOpt: e.target.value,
+      selectedOptionId: id,
+      defaultVideo: e.target.value,
+      videos: [...defaultVid, ...filteredVideoData],
       isDisabled: false,
     });
+    // CAN NOT RE-SELECT A DIFFERENT AFTER SELECTING THE FIRST ONE...
+    // Create a Disclaimer component for current resolution.
   };
 
   submitNewFolder = async (e) => {
@@ -114,7 +137,6 @@ class VideoCenter extends Component {
 
   editFolder = async (e) => {
     e.preventDefault();
-
     try {
       const editName = this.state.editName;
       const year_id = this.state.selectedOptionId;
@@ -128,7 +150,6 @@ class VideoCenter extends Component {
   };
 
   deleteFolder = async () => {
-    console.log("click delete btn");
     try {
       const year_id = this.state.selectedOptionId;
       console.log(year_id);
@@ -136,6 +157,14 @@ class VideoCenter extends Component {
     } catch (err) {
       console.error(err.message);
     }
+  };
+
+  editVideo = async (e) => {
+    e.preventDefault();
+  };
+
+  deleteVideo = async () => {
+    console.log("click delete btn");
   };
 
   reset = () => {
@@ -153,21 +182,22 @@ class VideoCenter extends Component {
 
   render() {
     const {
-      defaultOption,
+      defaultFolder,
       folders,
       videos,
-      defaultOpt,
+      defaultVideo,
       isDisabled,
     } = this.state;
-
+    console.log(videos);
     return (
       <>
         {/* ========= CREATE FOLDER/YEAR ========== */}
         <div className="create__folder">
           <form className="videoCenterForm" onSubmit={this.submitNewFolder}>
-            <label>Create Folder</label>
+            <label htmlFor="create">Create Folder</label>
             <Input
               type="text"
+              formId="create"
               name="folderName"
               value={this.state.folderName}
               style={{ width: "35%" }}
@@ -188,18 +218,18 @@ class VideoCenter extends Component {
             <label>
               Select Folder
               <DropDown
-                defaultValue={defaultOption}
-                handleOptions={this.handleSelectedOption}
+                defaultValue={defaultFolder}
+                handleOptions={this.handleFolderOption}
                 selectFolders={folders}
               />
             </label>
             <label>
               Date
               <Input
-                type="text"
+                // type="text"
                 name="date"
                 value={this.state.date}
-                placeholder="yyyy-mm-dd"
+                placeholder="dd-mm-yyy"
                 required
                 style={{ width: "65%" }}
                 handleInput={this.handleInputChange}
@@ -253,8 +283,8 @@ class VideoCenter extends Component {
             <label>
               Select Folder
               <DropDown
-                defaultValue={defaultOption}
-                handleOptions={this.handleSelectedOption}
+                defaultValue={defaultFolder}
+                handleOptions={this.handleFolderOption}
                 selectFolders={folders}
               />
             </label>
@@ -284,22 +314,22 @@ class VideoCenter extends Component {
         {/* ========== EDIT VIDEO ========== */}
         <div className="section__edits">
           <p>Edit Video</p>
-          <form className="videoForm" onSubmit={this.handleSubmit}>
+          <form className="videoForm" onSubmit={this.editVideo}>
             <label>
               Select Folder
               <DropDown
-                defaultValue={defaultOption}
-                handleOptions={this.handleOption}
+                defaultValue={defaultFolder}
+                handleOptions={this.handleVideoOption}
                 selectFolders={folders}
               />
             </label>
 
-            {defaultOpt ? (
+            {defaultVideo ? (
               <label>
                 Select Video
                 <DropDown
-                  defaultValue={defaultOpt}
-                  handleOptions={this.handleOption}
+                  defaultValue={defaultVideo}
+                  handleOptions={this.handleVideoOption}
                   selectFolders={videos}
                   isDisabled={isDisabled}
                 />

@@ -24,7 +24,6 @@ class CCPC extends Component {
     try {
       const yearsUrl = "http://localhost:5000/years";
       const videosUrl = "http://localhost:5000/videos";
-      // const url = "http://localhost:5000/";
       const yearsReqeust = await axios.get(yearsUrl);
       const videosRequest = await axios.get(videosUrl);
       const initialData = await Promise.all([yearsReqeust, videosRequest]).then(
