@@ -7,7 +7,7 @@ const DropDown = ({
   selectFolders,
   isDisabled,
 }) => {
-  // console.log(selectFolders);
+  console.log(defaultValue);
   return (
     <>
       <select
@@ -21,9 +21,8 @@ const DropDown = ({
           let year_id = folder.year_id;
           let title = folder.title;
           let video_id = folder.video_id;
-          console.log(`{${name}, ${year_id}} : {${title}, ${video_id}}`);
           return (
-            <option value={year_id ? year_id : video_id} key={i}>
+            <option value={video_id ? video_id : year_id} key={i}>
               {name ? name : title}
             </option>
           );
