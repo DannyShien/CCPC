@@ -1,8 +1,8 @@
 import React from "react";
 import Divider from "../../assets/Divider.png";
-import Video from "../../components/videoDisplay/Video";
+import VideoPlayer from "../../components/videoDisplay/VideoPlayer";
 
-const LiveSermons = () => {
+const LiveSermon = () => {
   return (
     <>
       <section className="CCPC__body">
@@ -15,10 +15,10 @@ const LiveSermons = () => {
           <h3>John 20:21-23</h3>
         </div>
 
-        <Video />
+        <VideoPlayer />
       </section>
     </>
   );
 };
 
-export default LiveSermons;
+export default LiveSermon;

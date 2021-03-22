@@ -16,7 +16,7 @@ const Header = () => {
       </div>
       <Navbar
         prevSermons="Previous Sermons"
-        liveSermons="Live Sermons"
+        liveSermon="Live Sermon"
         about="About"
       />
     </div>

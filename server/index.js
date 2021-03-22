@@ -2,7 +2,6 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const pool = require("./db");
-app.use(express.json());
 
 // ========== MIDDLEWARE ========== //
 app.use(cors());
@@ -11,7 +10,7 @@ app.use(express.json());
 // ========== ROUTES ========== //
 
 // ========== CREATE ========== //
-// CREATE YEAR
+// CREATE FOLDER
 app.post("/years", async (req, res) => {
   try {
     const { name } = req.body;
@@ -28,14 +27,14 @@ app.post("/years", async (req, res) => {
 // CREATE VIDEOS
 app.post("/videos", async (req, res) => {
   try {
-    const input_Date = req.body.input_date;
+    const input_date = req.body.input_date;
     const title = req.body.title;
     const verse = req.body.verse;
-    const videoKey = req.body.video_key;
-    // const fkey = await pool.query("");
+    const video_key = req.body.video_key;
+    const year_id = req.body.year_id;
     const newVideo = await pool.query(
-      "INSERT INTO videos (input_date, title, verse, video_key) VALUES ($1, $2, $3, $4) RETURNING *",
-      [input_Date, title, verse, videoKey]
+      "INSERT INTO videos (input_date, title, verse, video_key, year_id ) VALUES ($1, $2, $3, $4, $5) RETURNING *",
+      [input_date, title, verse, video_key, year_id]
     );
     res.json(newVideo.rows[0]);
   } catch (err) {
@@ -58,8 +57,6 @@ app.get("/years", async (req, res) => {
 app.get("/years/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    // console.log(req.params);
-    console.log(req.body);
     const yearId = await pool.query("SELECT * FROM years WHERE id = $1", [id]);
     res.json(yearId.rows[0]);
   } catch (err) {
@@ -95,9 +92,9 @@ app.get("/videos/:id", async (req, res) => {
 app.put("/years/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const folderName = req.body.name;
+    const folderName = req.body.editName;
     const updateYear = await pool.query(
-      "UPDATE years SET name = $1 WHERE id = $2 RETURNING *",
+      "UPDATE years SET name = $1 WHERE year_id = $2 RETURNING *",
       [folderName, id]
     );
     res.json(updateYear);
@@ -112,7 +109,7 @@ app.put("videos/:id", async (req, res) => {
     const { id } = req.params;
     const updateTitle = req.body.title;
     const titleUpdate = await pool.query(
-      "UPDATE videos SET title = $1 WHERE id = $2 RETURNING *",
+      "UPDATE videos SET title = $1 WHERE video_id = $2 RETURNING *",
       [updateTitle, id]
     );
     res.json(titleUpdate);
@@ -127,7 +124,7 @@ app.put("videos/:id", async (req, res) => {
     const { id } = req.params;
     const updateVerse = req.body.verse;
     const verseUpdate = await pool.query(
-      "UPDATE videos SET verse = $1 WHERE id = $2 RETURNING *",
+      "UPDATE videos SET verse = $1 WHERE video_id = $2 RETURNING *",
       [updateVerse, id]
     );
     res.json(verseUpdate);
@@ -142,7 +139,7 @@ app.put("video/:id", async (req, res) => {
     const { id } = req.params;
     const updateDate = req.body.input_date;
     const dateUpdate = await pool.query(
-      "UPDATE videos SET input_date = $1 WHERE id = $2 RETURNING *",
+      "UPDATE videos SET input_date = $1 WHERE video_id = $2 RETURNING *",
       [updateDate, id]
     );
     res.json(dateUpdate);
@@ -157,7 +154,7 @@ app.put("video/:id", async (req, res) => {
 //     const { fkey } = req.params;
 //     const updatedFKey = req.body.year_id;
 //     const fKeyUpdate = await pool.query(
-//       "UPDATE videos SET year_id = $1 WHERE id = $2 RETURNING *",
+//       "UPDATE videos SET year_id = $1 WHERE video_id = $2 RETURNING *",
 //       [updatedFKey, fkey]
 //     );
 //     res.json(console.log(fKeyUpdate));
@@ -175,7 +172,7 @@ app.put("/videos/:id", async (req, res) => {
     const updateDate = req.body.input_date;
     const updateFKey = req.body.year_id;
     const videoUpdate = await pool.query(
-      "UPDATE videos SET title = $1, verse = $2, input_date = $3, year_id = $4 WHERE id = $5 RETURNING *",
+      "UPDATE videos SET title = $1, verse = $2, input_date = $3, year_id = $4 WHERE video_id = $5 RETURNING *",
       [updateTitle, updateVerse, updateDate, updateFKey, id]
     );
     res.json(videoUpdate);
@@ -186,25 +183,29 @@ app.put("/videos/:id", async (req, res) => {
 
 // ========== DELETE ==========/
 // DELETE YEAR
-app.delete("/years:id", async (req, res) => {
+app.delete("/years/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const deleteYear = await pool.query("DELETE FROM years WHERE id = $1", [
-      id,
-    ]);
-    res.json(deleteYear);
+    console.log(`params`, id);
+    const deleteYear = await pool.query(
+      "DELETE FROM years WHERE year_id = $1",
+      [id]
+    );
+    // res.json(deleteYear);
+    res.json(console.log(deleteYear));
   } catch (err) {
     console.error(err.message);
   }
 });
 
 // DELETE VIDEOS
-app.delete("/videos:id", async (req, res) => {
+app.delete("/videos/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const deleteVideo = await pool.query("DELETE FROM videos WHERE id = $1", [
-      id,
-    ]);
+    const deleteVideo = await pool.query(
+      "DELETE FROM videos WHERE video_id = $1",
+      [id]
+    );
     res.json(deleteVideo);
   } catch (err) {
     console.error(err.message);

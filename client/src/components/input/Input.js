@@ -1,13 +1,23 @@
 import React from "react";
-import "./InputField.css";
-const InputField = ({ type, name, value, style, handleInput }) => {
+import "./Input.css";
+const Input = ({
+  type,
+  name,
+  formId,
+  value,
+  placeholder,
+  style,
+  handleInput,
+}) => {
   return (
     <>
       <input
         className="input"
         type={type}
+        id={formId}
         name={name}
         value={value}
+        placeholder={placeholder}
         style={style}
         onChange={handleInput}
       />
@@ -15,4 +25,4 @@ const InputField = ({ type, name, value, style, handleInput }) => {
   );
 };
 
-export default InputField;
+export default Input;

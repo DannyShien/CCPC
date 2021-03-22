@@ -7,7 +7,7 @@ const Vision = () => {
   return (
     <>
       <h2 className="sub__title">Vision</h2>
-      <img className="divider" src={Divider} />
+      <img className="divider" src={Divider} alt="" />
       <div className="vision__content content">
         <p>
           Dolor elit elit laborum cupidatat consequat proident cillum non. Elit
