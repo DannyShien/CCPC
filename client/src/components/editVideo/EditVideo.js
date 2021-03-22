@@ -4,7 +4,6 @@ import Input from "../input/Input";
 import DropDown from "../dropDown/DropDown";
 import Button from "../button/Button";
 import axios from "axios";
-// import axios from "axios";
 
 class EditVideo extends Component {
   state = {
@@ -100,7 +99,7 @@ class EditVideo extends Component {
       videos,
     } = this.state;
     const { folders } = this.props;
-    // console.log(defaultVideo, `VIDEOS:`, videos);
+    console.log(defaultFolder);
     return (
       <>
         <form className="form" onSubmit={this.editVideo}>
@@ -113,7 +112,7 @@ class EditVideo extends Component {
             />
           </label>
 
-          {!defaultFolder ? (
+          {!defaultFolder ? null : (
             <label>
               Select Video
               <DropDown
@@ -121,16 +120,6 @@ class EditVideo extends Component {
                 selectFolders={videos}
                 isDisabled={isDisabled}
                 handleOptions={this.handleVideoOption}
-              />
-            </label>
-          ) : (
-            <label>
-              Select Video
-              <DropDown
-                handleOptions={this.handleVideoOption}
-                defaultValue={defaultVideo}
-                selectFolders={videos}
-                isDisabled={isDisabled}
               />
             </label>
           )}

@@ -8,18 +8,24 @@ import Button from "../../components/button/Button";
 
 class CCPC extends Component {
   state = {
-    defaultOption: "select option",
+    selectedOptionId: 0,
+    defaultFolder: "select folder",
+    defaultVideo: "select video",
     isDisabled: true,
-    years: [],
-    videos: [],
+    defaultVideos: [{ video_id: 0, title: "select folder" }],
+    folders: [{ year_id: 0, name: "select folder" }],
+    videos: [{ video_id: 0, title: "select folder" }],
+
+    posting_date: "",
+    title: "",
+    verse: "",
+    video_id: "",
   };
 
-  // fetch data
   componentDidMount() {
     this.requestInitialData();
   }
 
-  // get folder of year
   requestInitialData = async () => {
     try {
       const yearsUrl = "http://localhost:5000/years";
@@ -31,39 +37,82 @@ class CCPC extends Component {
           return res;
         }
       );
-      let years = initialData[0].data;
+      let folders = initialData[0].data;
       let videos = initialData[1].data;
 
       this.setState({
-        years: years,
-        videos: videos,
+        folders: [...this.state.folders, ...folders],
+        videos: [...this.state.videos, ...videos],
       });
     } catch (err) {
       console.error(err.message);
     }
   };
 
-  // get videos from that folder
+  handleFolderOption = (e) => {
+    let id = parseInt(e.target.value);
 
-  // set data to state
-
-  // pass down to videoplayer component
-
-  handleDropdown = (e) => {
-    console.log(e.target.value);
+    const videos = this.state.videos;
+    let filteredVideoData = videos
+      .filter((video) => video.year_id === id)
+      .map((video) => {
+        return video;
+      });
     this.setState({
-      defaultOption: e.target.value,
+      selectedOptionId: id,
+      defaultFolder: e.target.value,
       isDisabled: false,
+      videos: [...this.state.defaultVideos, ...filteredVideoData],
     });
   };
 
-  handleSubmit = (e) => {
+  handleVideoOption = (e) => {
+    let id = parseInt(e.target.value);
+
+    this.setState({
+      selectedOptionId: id,
+      defaultVideo: e.target.value,
+    });
+  };
+
+  handleSelectBtn = (e) => {
     e.preventDefault();
+    let id = this.state.selectedOptionId;
+    // console.log(id);
+    const videos = this.state.videos;
+    let selectedVideo = videos.filter((video) => video.video_id === id)[0];
+    // console.log(selectedVideo);
+    let title = this.capitalizeName(selectedVideo.title);
+    let verse = this.capitalizeName(selectedVideo.verse);
+    let video_id = selectedVideo.video_key;
+
+    this.setState({
+      // date:
+      title,
+      verse,
+      video_id,
+    });
+  };
+
+  capitalizeName = (name) => {
+    const names = name.split(" ");
+    const namesUpper = [];
+    for (const n of names) {
+      namesUpper.push(n.replace(n[0], n[0].toUpperCase()));
+    }
+    console.log(namesUpper.join(" "));
+    // return namesUpper.join(" ");
   };
 
   render() {
-    const { defaultOption, isDisabled, years, videos } = this.state;
-    console.log(defaultOption, videos);
+    const {
+      defaultFolder,
+      defaultVideo,
+      isDisabled,
+      folders,
+      videos,
+    } = this.state;
+    console.log(videos);
     return (
       <>
         <section className="CCPC__body">
@@ -76,26 +125,33 @@ class CCPC extends Component {
             <h3>John 20:21-23</h3>
           </div>
 
-          <div className="variants">
-            <form className="variantForm" onSubmit={this.handleSubmit}>
+          <div className="options">
+            <form className="optionsForm" onSubmit={this.handleSelectBtn}>
               <label>
+                Select Folder
                 <DropDown
-                  defaultValue={defaultOption}
-                  handleOptions={this.handleDropdown}
-                  selectFolders={years}
+                  defaultValue={defaultFolder}
+                  handleOptions={this.handleFolderOption}
+                  selectFolders={folders}
                 />
               </label>
-              {defaultOption ? (
+
+              {defaultFolder ? (
                 <label>
+                  Select Video
                   <DropDown
-                    defaultValue={defaultOption}
-                    handleOptions={this.handleDropdown}
+                    defaultValue={defaultVideo}
                     selectFolders={videos}
                     isDisabled={isDisabled}
+                    handleOptions={this.handleVideoOption}
                   />
                 </label>
               ) : null}
-              <Button type="submit" text="Select" />
+              <Button
+                type="submit"
+                text="Select"
+                style={{ alignSelf: "flex-end", width: "65%" }}
+              />
             </form>
           </div>
 

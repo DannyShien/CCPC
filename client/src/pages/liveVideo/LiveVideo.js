@@ -12,16 +12,14 @@ class LiveVideo extends Component {
     videoId: "",
   };
 
-  handleInput = (e) => {
+  handleInputChange = (e) => {
     this.setState({
       [e.target.name]: e.target.value,
     });
   };
 
-  handleSubmit = (e) => {
+  UploadNewVideo = (e) => {
     e.preventDefault();
-    // Does something here and submits to backend..
-    this.reset();
   };
 
   reset = () => {
@@ -33,81 +31,62 @@ class LiveVideo extends Component {
     });
   };
 
-  liveVideoForm = () => {
-    const inputStyle = {
-      height: "2em",
-      width: "65%",
-    };
-
-    const btnStyle = {
-      alignSelf: "flex-end",
-      height: "2em",
-      width: "65%",
-    };
-
-    return (
-      <>
-        <label>
-          Date
-          <Input
-            type="text"
-            name="date"
-            value={this.state.date}
-            required
-            style={inputStyle}
-            handleInput={this.handleInput}
-          />
-        </label>
-        <label>
-          Title
-          <Input
-            type="text"
-            name="title"
-            value={this.state.title}
-            required
-            style={inputStyle}
-            handleInput={this.handleInput}
-          />
-        </label>
-        <label>
-          Verse
-          <Input
-            type="text"
-            name="verse"
-            value={this.state.verse}
-            required
-            style={inputStyle}
-            handleInput={this.handleInput}
-          />
-        </label>
-        <label>
-          Video ID
-          <Input
-            type="text"
-            name="videoId"
-            value={this.state.videoId}
-            required
-            style={inputStyle}
-            handleInput={this.handleInput}
-          />
-        </label>
-
-        <Button
-          className="upload"
-          text="Upload"
-          type="submit"
-          style={btnStyle}
-        />
-      </>
-    );
-  };
-
   render() {
     return (
       <div className="liveUpload">
-        <div className="section__edits">
-          <form className="uploadForm" onSubmit={this.handleSubmit}>
-            {this.liveVideoForm()}
+        <div className="uploadForm">
+          <form className="form" onSubmit={this.UploadNewVideo}>
+            <label>
+              Date
+              <Input
+                type="text"
+                name="date"
+                value={this.state.date}
+                required
+                style={{ width: "65%" }}
+                handleInputChange={this.handleInputChange}
+              />
+            </label>
+            <label>
+              Title
+              <Input
+                type="text"
+                name="title"
+                value={this.state.title}
+                required
+                style={{ width: "65%" }}
+                handleInputChange={this.handleInputChange}
+              />
+            </label>
+            <label>
+              Verse
+              <Input
+                type="text"
+                name="verse"
+                value={this.state.verse}
+                required
+                style={{ width: "65%" }}
+                handleInputChange={this.handleInputChange}
+              />
+            </label>
+            <label>
+              Video ID
+              <Input
+                type="text"
+                name="videoId"
+                value={this.state.videoId}
+                required
+                style={{ width: "65%" }}
+                handleInputChange={this.handleInputChange}
+              />
+            </label>
+
+            <Button
+              className="upload"
+              text="Upload"
+              type="submit"
+              style={{ alignSelf: "flex-end", width: "65%" }}
+            />
           </form>
         </div>
       </div>

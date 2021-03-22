@@ -133,7 +133,7 @@ app.put("videos/:id", async (req, res) => {
   }
 });
 
-// UPDATE VIDEO INPUT_DATE BY ID
+// UPDATE VIDEO DATE BY ID
 app.put("video/:id", async (req, res) => {
   try {
     const { id } = req.params;
@@ -191,8 +191,7 @@ app.delete("/years/:id", async (req, res) => {
       "DELETE FROM years WHERE year_id = $1",
       [id]
     );
-    // res.json(deleteYear);
-    res.json(console.log(deleteYear));
+    res.json(deleteYear);
   } catch (err) {
     console.error(err.message);
   }

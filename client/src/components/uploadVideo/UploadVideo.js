@@ -45,7 +45,7 @@ class UploadVideo extends Component {
         verse,
         video_key,
       });
-      // window.location = "/admin/videocenter";
+      window.location = "/admin/videocenter";
     } catch (err) {
       console.error(err.message);
     }
@@ -83,7 +83,7 @@ class UploadVideo extends Component {
               type="text"
               name="date"
               value={date}
-              placeholder="dd-mm-yyy"
+              placeholder="yyyy-mm-dd"
               required
               style={{ width: "65%" }}
               handleInput={this.handleInputChange}
