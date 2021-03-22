@@ -3,6 +3,7 @@ import "../../stylesheet/Styles.css";
 import Input from "../input/Input";
 import DropDown from "../dropDown/DropDown";
 import Button from "../button/Button";
+import axios from "axios";
 // import axios from "axios";
 
 class EditVideo extends Component {
@@ -50,15 +51,33 @@ class EditVideo extends Component {
     });
     // Create a Disclaimer component for current resolution.
   };
-
+  // Edit video will need more logic. Either edit all fields, edit date, edit title or edit verse.
   editVideo = async (e) => {
     e.preventDefault();
-
+    try {
+      const video_id = this.state.selectedOptionId;
+      const date = this.state.date;
+      const title = this.state.title;
+      const verse = this.state.verse;
+      await axios.put(`http://localhost:5000/videos/${video_id}`, {
+        date,
+        title,
+        verse,
+      });
+    } catch (err) {
+      console.error(err.message);
+    }
     this.reset();
   };
 
   deleteVideo = async () => {
-    console.log("click delete btn");
+    try {
+      const video_id = this.state.selectedOptionId;
+      await axios.delete(`http://localhost:5000/videos/${video_id}`);
+      window.location = "/admin/videocenter";
+    } catch (err) {
+      console.error(err.message);
+    }
   };
 
   reset = () => {
@@ -81,7 +100,7 @@ class EditVideo extends Component {
       videos,
     } = this.state;
     const { folders } = this.props;
-    console.log(defaultFolder, `VIDEOS:`, videos);
+    // console.log(defaultVideo, `VIDEOS:`, videos);
     return (
       <>
         <form className="form" onSubmit={this.editVideo}>
@@ -152,7 +171,12 @@ class EditVideo extends Component {
 
           <div className="btn__container">
             <Button type="submit" text="Edit" style={{ width: "45%" }} />
-            <Button type="submit" text="Remove" style={{ width: "45%" }} />
+            <Button
+              type="submit"
+              text="Remove"
+              style={{ width: "45%" }}
+              handleDelete={this.deleteVideo}
+            />
           </div>
         </form>
       </>

@@ -45,8 +45,8 @@ class EditFolder extends Component {
   deleteFolder = async () => {
     try {
       const year_id = this.state.selectedOptionId;
-      console.log(year_id);
       await axios.delete(`http://localhost:5000/years/${year_id}`);
+      window.location = "/admin/videocenter";
     } catch (err) {
       console.error(err.message);
     }
