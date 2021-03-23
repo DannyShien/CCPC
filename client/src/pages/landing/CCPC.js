@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import "./CCPC.css";
 import Divider from "../../assets/Divider.png";
 import axios from "axios";
-import DropDown from "../../components/dropDown/DropDown";
-import Button from "../../components/button/Button";
-// import VideoPlayer from "../../components/videoDisplay/VideoPlayer";
-import Youtube from "react-youtube";
+// import DropDown from "../../components/dropDown/DropDown";
+// import Button from "../../components/button/Button";
+import VideoPlayer from "../../components/videoDisplay/VideoPlayer";
+// import Youtube from "react-youtube";
 import SelectVideo from "../../components/selectVideoForm/SelectVideo";
 
 class CCPC extends Component {
@@ -126,7 +126,7 @@ class CCPC extends Component {
     } = this.state;
     console.log(video_id);
 
-    const opts = { height: "390", width: "640", playerVars: { autoplay: 2 } };
+    // const opts = { height: "390", width: "640", playerVars: { autoplay: 2 } };
     return (
       <>
         <section className="CCPC__body">
@@ -141,21 +141,18 @@ class CCPC extends Component {
             <h3>{verse}</h3>
           </div>
 
-          <div className="options">
-            <SelectVideo
-              defaultFolder={defaultFolder}
-              defaultVideo={defaultVideo}
-              folders={folders}
-              videos={videos}
-              isDisabled={isDisabled}
-              handleSelectBtn={this.handleSelectBtn}
-              handleFolderOption={this.handleFolderOption}
-              handleVideoOption={this.handleVideoOption}
-            />
-          </div>
+          <SelectVideo
+            defaultFolder={defaultFolder}
+            defaultVideo={defaultVideo}
+            folders={folders}
+            videos={videos}
+            isDisabled={isDisabled}
+            handleSelectBtn={this.handleSelectBtn}
+            handleFolderOption={this.handleFolderOption}
+            handleVideoOption={this.handleVideoOption}
+          />
 
-          {/* <VideoPlayer /> */}
-          <Youtube videoId={video_id} opts={opts} />
+          <VideoPlayer video_id={video_id} />
         </section>
       </>
     );

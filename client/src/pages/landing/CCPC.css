@@ -4,7 +4,6 @@
   height: 100%;
   width: inherit;
 }
-
 .titles {
   align-items: center;
   display: flex;
@@ -23,25 +22,4 @@
 .titles h3 {
   margin: 5px 0;
   font-weight: 400;
-}
-
-.options {
-  display: flex;
-  height: 30vh;
-  justify-content: center;
-  width: 100vw;
-}
-.optionsForm {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  justify-content: space-evenly;
-  width: 40vw;
-}
-.optionsForm label {
-  align-items: center;
-  display: flex;
-  height: 15%;
-  justify-content: space-between;
-  width: 100%;
 }

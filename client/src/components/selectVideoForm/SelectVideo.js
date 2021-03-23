@@ -1,4 +1,5 @@
 import React from "react";
+import "./SelectVideo.css";
 import DropDown from "../dropDown/DropDown";
 import Button from "../button/Button";
 
@@ -13,7 +14,7 @@ const SelectVideo = ({
   handleVideoOption,
 }) => {
   return (
-    <>
+    <div className="options">
       <form className="optionsForm" onSubmit={handleSelectBtn}>
         <label>
           Select Folder
@@ -38,10 +39,10 @@ const SelectVideo = ({
         <Button
           type="submit"
           text="Select"
-          style={{ alignSelf: "flex-end", width: "65%" }}
+          style={{ alignSelf: "flex-end", fontSize: "70%", width: "65%" }}
         />
       </form>
-    </>
+    </div>
   );
 };
 

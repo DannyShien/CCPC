@@ -1,9 +1,8 @@
 .video__container {
   align-items: center;
-  clear: both;
   display: flex;
-  float: none;
-  height: 315px;
+  height: 100%;
   justify-content: center;
-  width: 7000px;
+  padding: 5% 0 7%;
+  width: auto;
 }
