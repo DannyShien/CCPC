@@ -66,6 +66,11 @@ class VideoCenter extends Component {
         </div>
 
         {/* ========== EDIT VIDEO ========== */}
+        <p style={{ fontSize: "60%" }}>
+          * disclaimer: please refresh page before re-selecting a different
+          option *
+        </p>
+
         <div className="form_section">
           <p>Edit Video</p>
           <EditVideo folders={folders} videos={videos} />

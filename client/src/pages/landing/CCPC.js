@@ -2,10 +2,7 @@ import React, { Component } from "react";
 import "./CCPC.css";
 import Divider from "../../assets/Divider.png";
 import axios from "axios";
-// import DropDown from "../../components/dropDown/DropDown";
-// import Button from "../../components/button/Button";
 import VideoPlayer from "../../components/videoDisplay/VideoPlayer";
-// import Youtube from "react-youtube";
 import SelectVideo from "../../components/selectVideoForm/SelectVideo";
 
 class CCPC extends Component {
@@ -93,6 +90,7 @@ class CCPC extends Component {
       verse,
       video_id,
     });
+    this.reset();
   };
 
   capitalizeName = (name) => {
@@ -101,8 +99,21 @@ class CCPC extends Component {
     for (const n of names) {
       namesUpper.push(n.replace(n[0], n[0].toUpperCase()));
     }
-    console.log(namesUpper.join(" "));
+    // console.log(namesUpper.join(" "));
     return namesUpper.join(" ");
+  };
+
+  reset = () => {
+    this.requestInitialData();
+    this.setState({
+      selectedOptionId: 0,
+      defaultFolder: "select folder",
+      defaultVideo: "select video",
+      isDisabled: true,
+      defaultVideos: [{ video_id: 0, title: "select folder" }],
+      folders: [{ year_id: 0, name: "select folder" }],
+      videos: [{ video_id: 0, title: "select folder" }],
+    });
   };
 
   // METHODS RELATING TO YOUTUBE FUNCTIONALITY // NOTES: not really need at this moment.
@@ -124,9 +135,7 @@ class CCPC extends Component {
       verse,
       video_id,
     } = this.state;
-    console.log(video_id);
 
-    // const opts = { height: "390", width: "640", playerVars: { autoplay: 2 } };
     return (
       <>
         <section className="CCPC__body">
@@ -135,9 +144,7 @@ class CCPC extends Component {
             <img src={Divider} alt="" />
             <p>1/19/2021</p>
 
-            {/* <h1>"Receive the Holy Spirit"</h1> */}
             <h1>{title}</h1>
-            {/* <h3>John 20:21-23</h3> */}
             <h3>{verse}</h3>
           </div>
 
