@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import "./VideoCenter.css";
-import CreateFolder from "../../components/createFolder/CreateFolder";
-import UploadVideo from "../../components/uploadVideo/UploadVideo";
-import EditFolder from "../../components/editFolder/EditFolder";
-import EditVideo from "../../components/editVideo/EditVideo";
+import CreateFolder from "../../components/createFolderForm/CreateFolder";
+import UploadVideo from "../../components/uploadVideoForm/UploadVideo";
+import EditFolder from "../../components/editFolderForm/EditFolder";
+import EditVideo from "../../components/editVideoForm/EditVideo";
 import axios from "axios";
 
 class VideoCenter extends Component {

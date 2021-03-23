@@ -6,6 +6,7 @@ import DropDown from "../../components/dropDown/DropDown";
 import Button from "../../components/button/Button";
 // import VideoPlayer from "../../components/videoDisplay/VideoPlayer";
 import Youtube from "react-youtube";
+import SelectVideo from "../../components/selectVideoForm/SelectVideo";
 
 class CCPC extends Component {
   state = {
@@ -141,33 +142,16 @@ class CCPC extends Component {
           </div>
 
           <div className="options">
-            <form className="optionsForm" onSubmit={this.handleSelectBtn}>
-              <label>
-                Select Folder
-                <DropDown
-                  defaultValue={defaultFolder}
-                  handleOptions={this.handleFolderOption}
-                  selectFolders={folders}
-                />
-              </label>
-
-              {defaultFolder ? (
-                <label>
-                  Select Video
-                  <DropDown
-                    defaultValue={defaultVideo}
-                    selectFolders={videos}
-                    isDisabled={isDisabled}
-                    handleOptions={this.handleVideoOption}
-                  />
-                </label>
-              ) : null}
-              <Button
-                type="submit"
-                text="Select"
-                style={{ alignSelf: "flex-end", width: "65%" }}
-              />
-            </form>
+            <SelectVideo
+              defaultFolder={defaultFolder}
+              defaultVideo={defaultVideo}
+              folders={folders}
+              videos={videos}
+              isDisabled={isDisabled}
+              handleSelectBtn={this.handleSelectBtn}
+              handleFolderOption={this.handleFolderOption}
+              handleVideoOption={this.handleVideoOption}
+            />
           </div>
 
           {/* <VideoPlayer /> */}
