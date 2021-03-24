@@ -50,7 +50,6 @@ class EditVideo extends Component {
       defaultVideo: e.target.value,
       // videos: this.state.videos,
     });
-    // Create a Disclaimer component for current resolution.
     // this.resetVideo(id); // might not need this as well...
   };
 
@@ -118,7 +117,7 @@ class EditVideo extends Component {
       verse: "",
       isDisabled: true,
       selectedOptionId: 0,
-      // defaultVideo: "select video",
+      defaultVideo: "select video",
       videos: [{ video_id: 0, title: "select folder" }],
     });
   };

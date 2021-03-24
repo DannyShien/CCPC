@@ -11,11 +11,12 @@ class CCPC extends Component {
     defaultFolder: "select folder",
     defaultVideo: "select video",
     isDisabled: true,
+    isShowPlayer: false,
     defaultVideos: [{ video_id: 0, title: "select folder" }],
     folders: [{ year_id: 0, name: "select folder" }],
     videos: [{ video_id: 0, title: "select folder" }],
 
-    posting_date: "",
+    date: "",
     title: "",
     verse: "",
     video_id: "",
@@ -57,6 +58,7 @@ class CCPC extends Component {
       .map((video) => {
         return video;
       });
+
     this.setState({
       selectedOptionId: id,
       defaultFolder: e.target.value,
@@ -79,16 +81,19 @@ class CCPC extends Component {
     let id = this.state.selectedOptionId;
     const videos = this.state.videos;
     let selectedVideo = videos.filter((video) => video.video_id === id)[0];
+    let convertedDate = new Date(selectedVideo.posting_date);
+    let date = convertedDate.toLocaleDateString();
     let title = this.capitalizeName(selectedVideo.title);
     let verse = this.capitalizeName(selectedVideo.verse);
     let video_id = selectedVideo.video_key;
     // window.location = "/";  // this just reloads the whole page..
 
     this.setState({
-      // date: // NEED TO CONVERT TIMESTAMP
+      date,
       title,
       verse,
       video_id,
+      isShowPlayer: true,
     });
     this.reset();
   };
@@ -99,7 +104,6 @@ class CCPC extends Component {
     for (const n of names) {
       namesUpper.push(n.replace(n[0], n[0].toUpperCase()));
     }
-    // console.log(namesUpper.join(" "));
     return namesUpper.join(" ");
   };
 
@@ -130,19 +134,20 @@ class CCPC extends Component {
       isDisabled,
       folders,
       videos,
-      // posting_date,
+      isShowPlayer,
+      date,
       title,
       verse,
       video_id,
     } = this.state;
-
+    console.log(isShowPlayer);
     return (
       <>
         <section className="CCPC__body">
           <div className="titles">
             <h4>Previous Sermon</h4>
             <img src={Divider} alt="" />
-            <p>1/19/2021</p>
+            <p>{date}</p>
 
             <h1>{title}</h1>
             <h3>{verse}</h3>
@@ -158,8 +163,8 @@ class CCPC extends Component {
             handleFolderOption={this.handleFolderOption}
             handleVideoOption={this.handleVideoOption}
           />
-
-          <VideoPlayer video_id={video_id} />
+          {/* SHOWS VIDEO PLAYER AFTER SELECTING OPTIONS */}
+          {isShowPlayer ? <VideoPlayer video_id={video_id} /> : null}
         </section>
       </>
     );
