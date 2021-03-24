@@ -3,23 +3,29 @@ import "./CCPC.css";
 import Divider from "../../assets/Divider.png";
 import axios from "axios";
 import VideoPlayer from "../../components/videoDisplay/VideoPlayer";
-import DropDown from "../../components/dropDown/DropDown";
-import Button from "../../components/button/Button";
+import SelectVideo from "../../components/selectVideoForm/SelectVideo";
 
 class CCPC extends Component {
   state = {
-    defaultOption: "select option",
+    selectedOptionId: 0,
+    defaultFolder: "select folder",
+    defaultVideo: "select video",
     isDisabled: true,
-    years: [],
-    videos: [],
+    isShowPlayer: false,
+    defaultVideos: [{ video_id: 0, title: "select folder" }],
+    folders: [{ year_id: 0, name: "select folder" }],
+    videos: [{ video_id: 0, title: "select folder" }],
+
+    date: "",
+    title: "",
+    verse: "",
+    video_id: "",
   };
 
-  // fetch data
   componentDidMount() {
     this.requestInitialData();
   }
 
-  // get folder of year
   requestInitialData = async () => {
     try {
       const yearsUrl = "http://localhost:5000/years";
@@ -31,75 +37,134 @@ class CCPC extends Component {
           return res;
         }
       );
-      let years = initialData[0].data;
+      let folders = initialData[0].data;
       let videos = initialData[1].data;
 
       this.setState({
-        years: years,
-        videos: videos,
+        folders: [...this.state.folders, ...folders],
+        videos: [...this.state.videos, ...videos],
       });
     } catch (err) {
       console.error(err.message);
     }
   };
 
-  // get videos from that folder
+  handleFolderOption = (e) => {
+    let id = parseInt(e.target.value);
 
-  // set data to state
+    const videos = this.state.videos;
+    let filteredVideoData = videos
+      .filter((video) => video.year_id === id)
+      .map((video) => {
+        return video;
+      });
 
-  // pass down to videoplayer component
-
-  handleDropdown = (e) => {
-    console.log(e.target.value);
     this.setState({
-      defaultOption: e.target.value,
+      selectedOptionId: id,
+      defaultFolder: e.target.value,
       isDisabled: false,
+      videos: [...this.state.defaultVideos, ...filteredVideoData],
     });
   };
 
-  handleSubmit = (e) => {
-    e.preventDefault();
+  handleVideoOption = (e) => {
+    let id = parseInt(e.target.value);
+
+    this.setState({
+      selectedOptionId: id,
+      defaultVideo: e.target.value,
+    });
   };
 
+  handleSelectBtn = (e) => {
+    e.preventDefault();
+    let id = this.state.selectedOptionId;
+    const videos = this.state.videos;
+    let selectedVideo = videos.filter((video) => video.video_id === id)[0];
+    let convertedDate = new Date(selectedVideo.posting_date);
+    let date = convertedDate.toLocaleDateString();
+    let title = this.capitalizeName(selectedVideo.title);
+    let verse = this.capitalizeName(selectedVideo.verse);
+    let video_id = selectedVideo.video_key;
+    // window.location = "/";  // this just reloads the whole page..
+
+    this.setState({
+      date,
+      title,
+      verse,
+      video_id,
+      isShowPlayer: true,
+    });
+    this.reset();
+  };
+
+  capitalizeName = (name) => {
+    const names = name.split(" ");
+    const namesUpper = [];
+    for (const n of names) {
+      namesUpper.push(n.replace(n[0], n[0].toUpperCase()));
+    }
+    return namesUpper.join(" ");
+  };
+
+  reset = () => {
+    this.requestInitialData();
+    this.setState({
+      selectedOptionId: 0,
+      defaultFolder: "select folder",
+      defaultVideo: "select video",
+      isDisabled: true,
+      defaultVideos: [{ video_id: 0, title: "select folder" }],
+      folders: [{ year_id: 0, name: "select folder" }],
+      videos: [{ video_id: 0, title: "select folder" }],
+    });
+  };
+
+  // METHODS RELATING TO YOUTUBE FUNCTIONALITY // NOTES: not really need at this moment.
+  // onReady = (e) => {
+  //   console.log(e.target);
+  //   // e.target.pauseVideo();
+  //   e.target.playVideo();
+  // };
+
   render() {
-    const { defaultOption, isDisabled, years, videos } = this.state;
-    console.log(defaultOption, videos);
+    const {
+      defaultFolder,
+      defaultVideo,
+      isDisabled,
+      folders,
+      videos,
+      isShowPlayer,
+      date,
+      title,
+      verse,
+      video_id,
+    } = this.state;
+    console.log(isShowPlayer);
     return (
       <>
         <section className="CCPC__body">
           <div className="titles">
             <h4>Previous Sermon</h4>
             <img src={Divider} alt="" />
-            <p>1/19/2021</p>
+            <p>{date}</p>
 
-            <h1>"Receive the Holy Spirit"</h1>
-            <h3>John 20:21-23</h3>
+            <h1>{title}</h1>
+            <h3>{verse}</h3>
           </div>
 
-          <div className="variants">
-            <form className="variantForm" onSubmit={this.handleSubmit}>
-              <label>
-                <DropDown
-                  defaultValue={defaultOption}
-                  handleOptions={this.handleDropdown}
-                  selectFolders={years}
-                />
-              </label>
-              {defaultOption ? (
-                <label>
-                  <DropDown
-                    defaultValue={defaultOption}
-                    handleOptions={this.handleDropdown}
-                    selectFolders={videos}
-                    isDisabled={isDisabled}
-                  />
-                </label>
-              ) : null}
-              <Button type="submit" text="Select" />
-            </form>
-          </div>
-
-          <VideoPlayer />
+          <SelectVideo
+            defaultFolder={defaultFolder}
+            defaultVideo={defaultVideo}
+            folders={folders}
+            videos={videos}
+            isDisabled={isDisabled}
+            handleSelectBtn={this.handleSelectBtn}
+            handleFolderOption={this.handleFolderOption}
+            handleVideoOption={this.handleVideoOption}
+          />
+          {/* SHOWS VIDEO PLAYER AFTER SELECTING OPTIONS */}
+          {isShowPlayer ? <VideoPlayer video_id={video_id} /> : null}
         </section>
       </>
     );

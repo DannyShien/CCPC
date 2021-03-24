@@ -14,6 +14,7 @@ const Routes = () => {
 
       <Fragment>
         <Header />
+        {/* NOTE: Possibly change path name to /crossingcommunitypresbyterianchurch */}
         <Route exact path="/" component={CCPC} />
         <Route path="/livesermon" component={LiveSermon} />
         <Route path="/about" component={About} />

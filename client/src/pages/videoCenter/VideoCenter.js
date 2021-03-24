@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import "./VideoCenter.css";
-import CreateFolder from "../../components/createFolder/CreateFolder";
-import UploadVideo from "../../components/uploadVideo/UploadVideo";
-import EditFolder from "../../components/editFolder/EditFolder";
-import EditVideo from "../../components/editVideo/EditVideo";
+import CreateFolder from "../../components/createFolderForm/CreateFolder";
+import UploadVideo from "../../components/uploadVideoForm/UploadVideo";
+import EditFolder from "../../components/editFolderForm/EditFolder";
+import EditVideo from "../../components/editVideoForm/EditVideo";
 import axios from "axios";
 
 class VideoCenter extends Component {
@@ -39,22 +39,6 @@ class VideoCenter extends Component {
     }
   };
 
-  // ========================================================= //
-  // USE THIS METHOD TO DISPLAY TITLE AND VERSE ON CCPC.JS
-  // capitalizeName = (name) => {
-  //   const names = name.split(" ");
-  //   const namesUpper = [];
-
-  //   for (const n of names) {
-  //     // namesUpper.push(n[0].toUpperCase() + n.slice(1));
-  //     namesUpper.push(n.replace(n[0], n[0].toUpperCase()));
-  //   }
-  //   console.log(namesUpper.join(" "));
-  //   return namesUpper.join(" ");
-  //   // console.log(namesUpper);
-  // };
-  // ========================================================= //
-
   render() {
     const { folders, videos } = this.state;
 
@@ -82,6 +66,11 @@ class VideoCenter extends Component {
         </div>
 
         {/* ========== EDIT VIDEO ========== */}
+        <p style={{ fontSize: "60%" }}>
+          * disclaimer: please refresh page before re-selecting a different
+          option *
+        </p>
+
         <div className="form_section">
           <p>Edit Video</p>
           <EditVideo folders={folders} videos={videos} />

@@ -4,7 +4,6 @@ import Input from "../input/Input";
 import DropDown from "../dropDown/DropDown";
 import Button from "../button/Button";
 import axios from "axios";
-// import axios from "axios";
 
 class EditVideo extends Component {
   state = {
@@ -15,7 +14,7 @@ class EditVideo extends Component {
     selectedOptionId: 0,
     defaultFolder: "select folder",
     defaultVideo: "select video",
-    videos: [{ video_id: 0, title: "select folder" }],
+    videos: [{ video_id: 0, title: "select video" }],
   };
 
   handleInputChange = (e) => {
@@ -25,9 +24,8 @@ class EditVideo extends Component {
   };
 
   handleFolderOption = (e) => {
-    let id = parseInt(e.target.value);
-
     const videos = this.props.videos;
+    let id = parseInt(e.target.value);
     let filteredVideoData = videos
       .filter((video) => video.year_id === id)
       .map((video) => {
@@ -40,6 +38,8 @@ class EditVideo extends Component {
       isDisabled: false,
       videos: [...this.state.videos, ...filteredVideoData],
     });
+    // this.resetFolder(id);
+    // this.resetVideo(id);
   };
 
   handleVideoOption = (e) => {
@@ -48,9 +48,11 @@ class EditVideo extends Component {
     this.setState({
       selectedOptionId: id,
       defaultVideo: e.target.value,
+      // videos: this.state.videos,
     });
-    // Create a Disclaimer component for current resolution.
+    // this.resetVideo(id); // might not need this as well...
   };
+
   // Edit video will need more logic. Either edit all fields, edit date, edit title or edit verse.
   editVideo = async (e) => {
     e.preventDefault();
@@ -80,12 +82,43 @@ class EditVideo extends Component {
     }
   };
 
+  // resetFolder = (id) => {
+  //   console.log(`RESET`, id, `state:`, this.state.videos);
+  //   const videos = this.props.videos;
+  //   let filteredVideoData = videos
+  //     .filter((video) => video.year_id === id)
+  //     .map((video) => {
+  //       return video;
+  //     });
+  //   this.setState({
+  //     selectedOptionId: id,
+  //     defaultFolder: id,
+  //     // isDisabled: true, // dont think this is needed
+  //     videos: [...this.state.videos, ...filteredVideoData],
+  //     // videos: this.state.videos, // resets video state
+  //   });
+  // };
+
+  // resetVideo = (id) => {
+  //   console.log(`reset video:`, id);
+
+  //   this.setState({
+  //     selectedOptionId: id,
+  //     defaultVideo: "select video",
+  //     // defaultVideo: id,
+  //     // videos: [...this.state.videos, ...filteredVideoData],
+  //   });
+  // };
+
   reset = () => {
     this.setState({
       date: "",
       title: "",
       verse: "",
       isDisabled: true,
+      selectedOptionId: 0,
+      defaultVideo: "select video",
+      videos: [{ video_id: 0, title: "select folder" }],
     });
   };
 
@@ -100,7 +133,7 @@ class EditVideo extends Component {
       videos,
     } = this.state;
     const { folders } = this.props;
-    // console.log(defaultVideo, `VIDEOS:`, videos);
+    console.log(defaultVideo);
     return (
       <>
         <form className="form" onSubmit={this.editVideo}>
@@ -113,7 +146,7 @@ class EditVideo extends Component {
             />
           </label>
 
-          {!defaultFolder ? (
+          {!defaultVideo ? null : (
             <label>
               Select Video
               <DropDown
@@ -121,16 +154,6 @@ class EditVideo extends Component {
                 selectFolders={videos}
                 isDisabled={isDisabled}
                 handleOptions={this.handleVideoOption}
-              />
-            </label>
-          ) : (
-            <label>
-              Select Video
-              <DropDown
-                handleOptions={this.handleVideoOption}
-                defaultValue={defaultVideo}
-                selectFolders={videos}
-                isDisabled={isDisabled}
               />
             </label>
           )}
