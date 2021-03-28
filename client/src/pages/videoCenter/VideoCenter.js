@@ -1,15 +1,15 @@
 import React, { Component } from "react";
 import "./VideoCenter.css";
-import CreateFolder from "../../components/createFolderForm/CreateFolder";
+import CreateYear from "../../components/createYearForm/CreateYear";
 import UploadVideo from "../../components/uploadVideoForm/UploadVideo";
-import EditFolder from "../../components/editFolderForm/EditFolder";
+import EditYear from "../../components/editYearForm/EditYear";
 import EditVideo from "../../components/editVideoForm/EditVideo";
 import axios from "axios";
 
 class VideoCenter extends Component {
   state = {
-    folders: [{ year_id: 0, name: "select folder" }],
-    videos: [{ video_id: 0, title: "select folder" }],
+    years: [{ year_id: 0, name: "select year" }],
+    videos: [{ video_id: 0, title: "select video" }],
   };
 
   componentDidMount() {
@@ -27,11 +27,11 @@ class VideoCenter extends Component {
           return res;
         }
       );
-      let foldersData = initialData[0].data;
+      let yearsData = initialData[0].data;
       let videosData = initialData[1].data;
 
       this.setState({
-        folders: [...this.state.folders, ...foldersData],
+        years: [...this.state.years, ...yearsData],
         videos: [...this.state.videos, ...videosData],
       });
     } catch (err) {
@@ -40,29 +40,29 @@ class VideoCenter extends Component {
   };
 
   render() {
-    const { folders, videos } = this.state;
+    const { years, videos } = this.state;
 
     return (
       <>
-        {/* ========= CREATE FOLDER/YEAR ========== */}
+        {/* ========= CREATE YEAR ========== */}
         <div className="create__folder">
-          <CreateFolder
-            submitNewFolder={this.submitNewFolder}
-            folderName={this.state.folderName}
-            handleInputChange={this.handleInputChange}
+          <CreateYear
+          // submitNewYear={this.submitNewYear}
+          // years={this.state.years}
+          // handleInputChange={this.handleInputChange}
           />
         </div>
 
         {/* ========== UPLOAD VIDEO ========== */}
         <div className="form_section">
           <p>Upload Video</p>
-          <UploadVideo folders={folders} />
+          <UploadVideo years={years} />
         </div>
 
         {/* ========== EDIT FOLDER/YEAR ========== */}
         <div className="form_section">
           <p>Edit Folder</p>
-          <EditFolder folders={folders} />
+          <EditYear years={years} />
         </div>
 
         {/* ========== EDIT VIDEO ========== */}
@@ -73,7 +73,7 @@ class VideoCenter extends Component {
 
         <div className="form_section">
           <p>Edit Video</p>
-          <EditVideo folders={folders} videos={videos} />
+          <EditVideo years={years} videos={videos} />
         </div>
       </>
     );

@@ -20,6 +20,9 @@ class LiveVideo extends Component {
 
   UploadNewVideo = (e) => {
     e.preventDefault();
+    console.log(this.state.date);
+    console.log(e.target.value);
+    this.setState({});
   };
 
   reset = () => {
@@ -30,6 +33,8 @@ class LiveVideo extends Component {
       videoId: "",
     });
   };
+
+  // TODO Create seperate database table for this state and fetch data on frontend.
 
   render() {
     return (
@@ -42,9 +47,10 @@ class LiveVideo extends Component {
                 type="text"
                 name="date"
                 value={this.state.date}
+                placeholder="yyyy-mm-dd"
                 required
                 style={{ width: "65%" }}
-                handleInputChange={this.handleInputChange}
+                handleInput={this.handleInputChange}
               />
             </label>
             <label>
@@ -55,7 +61,7 @@ class LiveVideo extends Component {
                 value={this.state.title}
                 required
                 style={{ width: "65%" }}
-                handleInputChange={this.handleInputChange}
+                handleInput={this.handleInputChange}
               />
             </label>
             <label>
@@ -66,7 +72,7 @@ class LiveVideo extends Component {
                 value={this.state.verse}
                 required
                 style={{ width: "65%" }}
-                handleInputChange={this.handleInputChange}
+                handleInput={this.handleInputChange}
               />
             </label>
             <label>
@@ -77,7 +83,7 @@ class LiveVideo extends Component {
                 value={this.state.videoId}
                 required
                 style={{ width: "65%" }}
-                handleInputChange={this.handleInputChange}
+                handleInput={this.handleInputChange}
               />
             </label>
 

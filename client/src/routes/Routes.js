@@ -2,6 +2,7 @@ import React, { lazy, Fragment } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import CCPC from "../pages/landing/CCPC";
 import Header from "../components/headers/Header";
+import LiveVideo from "../pages/liveVideo/LiveVideo";
 
 const About = lazy(() => import("../pages/about/About"));
 const LiveSermon = lazy(() => import("../pages/liveSermon/LiveSermon"));

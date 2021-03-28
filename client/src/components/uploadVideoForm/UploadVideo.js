@@ -12,7 +12,7 @@ class UploadVideo extends Component {
     date: "",
     videoId: "",
     selectedOptionId: 0,
-    defaultFolder: "select folder",
+    defaultYear: "select year",
   };
 
   handleInputChange = (e) => {
@@ -21,12 +21,12 @@ class UploadVideo extends Component {
     });
   };
 
-  handleFolderOption = (e) => {
-    console.log("FOLDER ID: ", e.target.value);
+  handleYearOption = (e) => {
+    console.log("YEAR ID: ", e.target.value);
     let id = parseInt(e.target.value);
     this.setState({
       selectedOptionId: id,
-      defaultFolder: e.target.value,
+      defaultYear: e.target.value,
     });
   };
 
@@ -62,19 +62,21 @@ class UploadVideo extends Component {
     };
   };
 
+  // NOTES: Possibly fetch data and display as "placeholder" for input fields.
+
   render() {
-    const { defaultFolder, date, title, verse, videoId } = this.state;
-    const { folders } = this.props;
+    const { defaultYear, date, title, verse, videoId } = this.state;
+    const { years } = this.props;
 
     return (
       <>
         <form className="form" onSubmit={this.submitNewVideo}>
           <label>
-            Select Folder
+            Select Year
             <DropDown
-              defaultValue={defaultFolder}
-              handleOptions={this.handleFolderOption}
-              selectFolders={folders}
+              defaultValue={defaultYear}
+              handleOptions={this.handleYearOption}
+              selectYears={years}
             />
           </label>
           <label>

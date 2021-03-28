@@ -1,12 +1,7 @@
 import React from "react";
 import "./DropDown.css";
 
-const DropDown = ({
-  defaultValue,
-  handleOptions,
-  selectFolders,
-  isDisabled,
-}) => {
+const DropDown = ({ defaultValue, handleOptions, selectYears, isDisabled }) => {
   return (
     <>
       <select
@@ -15,7 +10,7 @@ const DropDown = ({
         onChange={handleOptions}
         disabled={isDisabled}
       >
-        {selectFolders.map((folder, i) => {
+        {selectYears.map((folder, i) => {
           let name = folder.name;
           let year_id = folder.year_id;
           let title = folder.title;
