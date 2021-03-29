@@ -76,7 +76,7 @@ class UploadVideo extends Component {
             <DropDown
               defaultValue={defaultYear}
               handleOptions={this.handleYearOption}
-              selectYears={years}
+              selectOptions={years}
             />
           </label>
           <label>

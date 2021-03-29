@@ -138,11 +138,11 @@ class EditVideo extends Component {
       <>
         <form className="form" onSubmit={this.editVideo}>
           <label>
-            Select Folder
+            Select Year
             <DropDown
               defaultValue={defaultYear}
               handleOptions={this.handleYearOption}
-              selectYears={years}
+              selectOptions={years}
             />
           </label>
 
@@ -151,7 +151,7 @@ class EditVideo extends Component {
               Select Video
               <DropDown
                 defaultValue={defaultVideo}
-                selectYears={videos}
+                selectOptions={videos}
                 isDisabled={isDisabled}
                 handleOptions={this.handleVideoOption}
               />

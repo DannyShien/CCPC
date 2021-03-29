@@ -10,13 +10,13 @@ app.use(express.json());
 // ========== ROUTES ========== //
 
 // ========== CREATE ========== //
-// CREATE FOLDER
+// CREATE YEAR
 app.post("/years", async (req, res) => {
   try {
-    const { name } = req.body;
+    const { year } = req.body;
     const newYear = await pool.query(
-      "INSERT INTO years (name) VALUES($1) RETURNING *",
-      [name]
+      "INSERT INTO years (year) VALUES($1) RETURNING *",
+      [year]
     );
     res.json(newYear.rows[0]);
   } catch (err) {
@@ -37,6 +37,23 @@ app.post("/videos", async (req, res) => {
       [input_date, title, verse, video_key, year_id]
     );
     res.json(newVideo.rows[0]);
+  } catch (err) {
+    console.error(err.message);
+  }
+});
+
+// CREATE SERMONS
+app.post("/sermons", async (req, res) => {
+  try {
+    const title = req.body.title;
+    const verse = req.body.verse;
+    const input_date = req.body.input_date;
+    const video_key = req.body.video_key;
+    const curSermon = await pool.query(
+      "INSERT INTO sermons (title, verse, input_date, video_key) VALUES ($1, $2, $3, $4) RETURNING * ",
+      [title, verse, input_date, video_key]
+    );
+    res.json(curSermon.rows[0]);
   } catch (err) {
     console.error(err.message);
   }
@@ -87,14 +104,37 @@ app.get("/videos/:id", async (req, res) => {
   }
 });
 
+// GET ALL SERMONS
+app.get("/sermons", async (req, res) => {
+  try {
+    const allSermons = await pool.query("SELECT * FROM sermons");
+    res.json(allSermons.rows);
+  } catch (err) {
+    console.error(err.message);
+  }
+});
+
+// GET SERMONS BY ID
+app.get("/sermons/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const sermonId = await pool.query("SELECT * FROM sermons WHERE id = $1", [
+      id,
+    ]);
+    res.json(sermonId.rows[0]);
+  } catch (err) {
+    console.error(err.message);
+  }
+});
+
 // ========== UPDATE ========== //
-// UPDATE FOLDER(YEAR) NAME BY ID
+// UPDATE YEAR NAME BY ID
 app.put("/years/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const folderName = req.body.editName;
     const updateYear = await pool.query(
-      "UPDATE years SET name = $1 WHERE year_id = $2 RETURNING *",
+      "UPDATE years SET year = $1 WHERE year_id = $2 RETURNING *",
       [folderName, id]
     );
     res.json(updateYear);
@@ -186,7 +226,6 @@ app.put("/videos/:id", async (req, res) => {
 app.delete("/years/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    console.log(`params`, id);
     const deleteYear = await pool.query(
       "DELETE FROM years WHERE year_id = $1",
       [id]

@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import "./CreateFolder.css";
+import "./CreateYear.css";
 import Input from "../input/Input";
 import Button from "../button/Button";
 import axios from "axios";
 
-class CreateFolder extends Component {
+class CreateYear extends Component {
   state = {
     year: "",
   };
@@ -57,4 +57,4 @@ class CreateFolder extends Component {
   }
 }
 
-export default CreateFolder;
+export default CreateYear;

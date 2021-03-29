@@ -5,11 +5,11 @@ import Button from "../button/Button";
 import DropDown from "../dropDown/DropDown";
 import axios from "axios";
 
-class EditFolder extends Component {
+class EditYear extends Component {
   state = {
-    editName: "",
+    editYear: "",
     selectedOptionId: 0,
-    defaultFolder: "select folder",
+    defaultYear: "select year",
   };
 
   handleInputChange = (e) => {
@@ -19,21 +19,21 @@ class EditFolder extends Component {
   };
 
   handleFolderOption = (e) => {
-    console.log("FOLDER ID: ", e.target.value);
+    console.log("YEAR ID: ", e.target.value);
     let id = parseInt(e.target.value);
     this.setState({
       selectedOptionId: id,
-      defaultFolder: e.target.value,
+      defaultYear: e.target.value,
     });
   };
 
-  editFolder = async (e) => {
+  editYear = async (e) => {
     e.preventDefault();
     try {
-      const editName = this.state.editName;
+      const editYear = this.state.editYear;
       const year_id = this.state.selectedOptionId;
       await axios.put(`http://localhost:5000/years/${year_id}`, {
-        editName,
+        editYear,
       });
       window.location = "/admin/videocenter";
     } catch (err) {
@@ -42,7 +42,7 @@ class EditFolder extends Component {
     this.reset();
   };
 
-  deleteFolder = async () => {
+  deleteYear = async () => {
     try {
       const year_id = this.state.selectedOptionId;
       await axios.delete(`http://localhost:5000/years/${year_id}`);
@@ -54,31 +54,31 @@ class EditFolder extends Component {
 
   reset = () => {
     this.setState = {
-      editName: "",
+      editYear: "",
     };
   };
 
   render() {
-    const { editName, defaultFolder } = this.state;
-    const { folders } = this.props;
+    const { editYear, defaultYear } = this.state;
+    const { years } = this.props;
 
     return (
       <>
-        <form className="form" onSubmit={this.editFolder}>
+        <form className="form" onSubmit={this.editYear}>
           <label>
-            Select Folder
+            Select Year
             <DropDown
-              defaultValue={defaultFolder}
+              defaultValue={defaultYear}
               handleOptions={this.handleFolderOption}
-              selectFolders={folders}
+              selectOptions={years}
             />
           </label>
           <label>
-            Edit Folder
+            Edit Year
             <Input
               type="text"
-              name="editName"
-              value={editName}
+              name="editYear"
+              value={editYear}
               style={{ width: "65%" }}
               handleInput={this.handleInputChange}
             />
@@ -90,7 +90,7 @@ class EditFolder extends Component {
               type="submit"
               text="Remove"
               style={{ width: "45%" }}
-              handleDelete={this.deleteFolder}
+              handleDelete={this.deleteYear}
             />
           </div>
         </form>
@@ -99,4 +99,4 @@ class EditFolder extends Component {
   }
 }
 
-export default EditFolder;
+export default EditYear;

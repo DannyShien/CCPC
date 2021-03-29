@@ -59,9 +59,9 @@ class VideoCenter extends Component {
           <UploadVideo years={years} />
         </div>
 
-        {/* ========== EDIT FOLDER/YEAR ========== */}
+        {/* ========== EDIT YEAR ========== */}
         <div className="form_section">
-          <p>Edit Folder</p>
+          <p>Edit Year</p>
           <EditYear years={years} />
         </div>
 
