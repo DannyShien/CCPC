@@ -12,9 +12,10 @@ class EditVideo extends Component {
     verse: "",
     isDisabled: true,
     selectedOptionId: 0,
-    defaultYear: "select year",
-    defaultVideo: "select video",
-    videos: [{ video_id: 0, title: "select video" }],
+    defaultYearText: "select year",
+    defaultVideoText: "select video",
+    defaultVideos: [{ video_id: 0, title: "select video" }],
+    reselectVideos: [{ video_id: 0, title: "select video" }],
   };
 
   handleInputChange = (e) => {
@@ -34,12 +35,10 @@ class EditVideo extends Component {
 
     this.setState({
       selectedOptionId: id,
-      defaultYear: e.target.value,
+      defaultYearText: e.target.value,
       isDisabled: false,
-      videos: [...this.state.videos, ...filteredVideoData],
+      reselectVideos: [...this.state.defaultVideos, ...filteredVideoData],
     });
-    // this.resetFolder(id);
-    // this.resetVideo(id);
   };
 
   handleVideoOption = (e) => {
@@ -47,10 +46,8 @@ class EditVideo extends Component {
 
     this.setState({
       selectedOptionId: id,
-      defaultVideo: e.target.value,
-      // videos: this.state.videos,
+      defaultVideoText: e.target.value,
     });
-    // this.resetVideo(id); // might not need this as well...
   };
 
   // Edit video will need more logic. Either edit all fields, edit date, edit title or edit verse.
@@ -82,34 +79,6 @@ class EditVideo extends Component {
     }
   };
 
-  // resetFolder = (id) => {
-  //   console.log(`RESET`, id, `state:`, this.state.videos);
-  //   const videos = this.props.videos;
-  //   let filteredVideoData = videos
-  //     .filter((video) => video.year_id === id)
-  //     .map((video) => {
-  //       return video;
-  //     });
-  //   this.setState({
-  //     selectedOptionId: id,
-  //     defaultYear: id,
-  //     // isDisabled: true, // dont think this is needed
-  //     videos: [...this.state.videos, ...filteredVideoData],
-  //     // videos: this.state.videos, // resets video state
-  //   });
-  // };
-
-  // resetVideo = (id) => {
-  //   console.log(`reset video:`, id);
-
-  //   this.setState({
-  //     selectedOptionId: id,
-  //     defaultVideo: "select video",
-  //     // defaultVideo: id,
-  //     // videos: [...this.state.videos, ...filteredVideoData],
-  //   });
-  // };
-
   reset = () => {
     this.setState({
       date: "",
@@ -117,7 +86,7 @@ class EditVideo extends Component {
       verse: "",
       isDisabled: true,
       selectedOptionId: 0,
-      defaultVideo: "select video",
+      defaultVideoText: "select video",
       videos: [{ video_id: 0, title: "select year" }],
     });
   };
@@ -127,31 +96,31 @@ class EditVideo extends Component {
       date,
       title,
       verse,
-      defaultYear,
-      defaultVideo,
+      defaultYearText,
+      defaultVideoText,
       isDisabled,
-      videos,
+      reselectVideos,
     } = this.state;
     const { years } = this.props;
-    // console.log(defaultVideo);
+
     return (
       <>
         <form className="form" onSubmit={this.editVideo}>
           <label>
             Select Year
             <DropDown
-              defaultValue={defaultYear}
+              defaultValue={defaultYearText}
               handleOptions={this.handleYearOption}
               selectOptions={years}
             />
           </label>
 
-          {!defaultVideo ? null : (
+          {!defaultVideoText ? null : (
             <label>
               Select Video
               <DropDown
-                defaultValue={defaultVideo}
-                selectOptions={videos}
+                defaultValue={defaultVideoText}
+                selectOptions={reselectVideos}
                 isDisabled={isDisabled}
                 handleOptions={this.handleVideoOption}
               />

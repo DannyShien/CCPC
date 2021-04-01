@@ -9,7 +9,7 @@ class EditYear extends Component {
   state = {
     editYear: "",
     selectedOptionId: 0,
-    defaultYear: "select year",
+    defaultYearText: "select year",
   };
 
   handleInputChange = (e) => {
@@ -23,7 +23,7 @@ class EditYear extends Component {
     let id = parseInt(e.target.value);
     this.setState({
       selectedOptionId: id,
-      defaultYear: e.target.value,
+      defaultYearText: e.target.value,
     });
   };
 
@@ -59,7 +59,7 @@ class EditYear extends Component {
   };
 
   render() {
-    const { editYear, defaultYear } = this.state;
+    const { editYear, defaultYearText } = this.state;
     const { years } = this.props;
 
     return (
@@ -68,7 +68,7 @@ class EditYear extends Component {
           <label>
             Select Year
             <DropDown
-              defaultValue={defaultYear}
+              defaultValue={defaultYearText}
               handleOptions={this.handleFolderOption}
               selectOptions={years}
             />

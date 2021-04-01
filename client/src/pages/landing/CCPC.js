@@ -8,8 +8,8 @@ import SelectVideo from "../../components/selectVideoForm/SelectVideo";
 class CCPC extends Component {
   state = {
     selectedOptionId: 0,
-    defaultYear: "select year",
-    defaultVideo: "select video",
+    defaultYearText: "select year",
+    defaultVideoText: "select video",
     isDisabled: true,
     isShowPlayer: false,
     defaultVideos: [{ video_id: 0, title: "select video" }],
@@ -58,9 +58,10 @@ class CCPC extends Component {
       .map((video) => {
         return video;
       });
+
     this.setState({
       selectedOptionId: id,
-      defaultYear: e.target.value,
+      defaultYearText: e.target.value,
       isDisabled: false,
       updatedVideos: [...this.state.defaultVideos, ...filteredVideoData],
     });
@@ -71,7 +72,7 @@ class CCPC extends Component {
 
     this.setState({
       selectedOptionId: id,
-      defaultVideo: e.target.value,
+      defaultVideoText: e.target.value,
     });
   };
 
@@ -113,8 +114,8 @@ class CCPC extends Component {
     this.requestInitialData();
     this.setState({
       selectedOptionId: 0,
-      defaultYear: "select year",
-      defaultVideo: "select video",
+      defaultYearText: "select year",
+      defaultVideoText: "select video",
       isDisabled: true,
       years: [{ year_id: 0, name: "select year" }],
       videos: [{ video_id: 0, title: "select year" }],
@@ -123,8 +124,8 @@ class CCPC extends Component {
 
   render() {
     const {
-      defaultYear,
-      defaultVideo,
+      defaultYearText,
+      defaultVideoText,
       isDisabled,
       years,
       updatedVideos,
@@ -148,8 +149,8 @@ class CCPC extends Component {
           </div>
 
           <SelectVideo
-            defaultYear={defaultYear}
-            defaultVideo={defaultVideo}
+            defaultYearText={defaultYearText}
+            defaultVideoText={defaultVideoText}
             years={years}
             videos={updatedVideos}
             isDisabled={isDisabled}

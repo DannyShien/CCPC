@@ -4,9 +4,9 @@ import DropDown from "../dropDown/DropDown";
 import Button from "../button/Button";
 
 const SelectVideo = ({
-  defaultYear,
+  defaultYearText,
   years,
-  defaultVideo,
+  defaultVideoText,
   videos,
   isDisabled,
   handleSelectBtn,
@@ -19,17 +19,17 @@ const SelectVideo = ({
         <label>
           Select Year
           <DropDown
-            defaultValue={defaultYear}
+            defaultValue={defaultYearText}
             handleOptions={handleYearOption}
             selectOptions={years}
           />
         </label>
 
-        {defaultYear ? (
+        {defaultYearText ? (
           <label>
             Select Video
             <DropDown
-              defaultValue={defaultVideo}
+              defaultValue={defaultVideoText}
               selectOptions={videos}
               isDisabled={isDisabled}
               handleOptions={handleVideoOption}
