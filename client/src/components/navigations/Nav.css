@@ -25,3 +25,11 @@
   font-weight: 700;
   color: #688d9c;
 }
+
+.dead__link {
+  color: black;
+  text-decoration: none;
+  margin-right: 10%;
+  text-align: center;
+  text-decoration: line-through;
+}

@@ -141,7 +141,7 @@ class CCPC extends Component {
       verse,
       video_id,
     } = this.state;
-    // console.log(isShowPlayer);
+
     return (
       <>
         <section className="CCPC__body">
