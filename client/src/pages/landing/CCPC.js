@@ -8,13 +8,13 @@ import SelectVideo from "../../components/selectVideoForm/SelectVideo";
 class CCPC extends Component {
   state = {
     selectedOptionId: 0,
-    defaultFolder: "select folder",
+    defaultYear: "select year",
     defaultVideo: "select video",
     isDisabled: true,
     isShowPlayer: false,
-    defaultVideos: [{ video_id: 0, title: "select folder" }],
-    folders: [{ year_id: 0, name: "select folder" }],
-    videos: [{ video_id: 0, title: "select folder" }],
+    defaultVideos: [{ video_id: 0, title: "select video" }],
+    years: [{ year_id: 0, name: "select year" }],
+    videos: [{ video_id: 0, title: "select video" }],
 
     date: "",
     title: "",
@@ -37,11 +37,11 @@ class CCPC extends Component {
           return res;
         }
       );
-      let folders = initialData[0].data;
+      let years = initialData[0].data;
       let videos = initialData[1].data;
 
       this.setState({
-        folders: [...this.state.folders, ...folders],
+        years: [...this.state.years, ...years],
         videos: [...this.state.videos, ...videos],
       });
     } catch (err) {
@@ -49,7 +49,8 @@ class CCPC extends Component {
     }
   };
 
-  handleFolderOption = (e) => {
+  handleYearOption = (e) => {
+    // NOTES: Find solution to update state everytime a new id is selected. Hopefully this should resolve the issue of user not being able to re-select an option.
     let id = parseInt(e.target.value);
 
     const videos = this.state.videos;
@@ -61,7 +62,7 @@ class CCPC extends Component {
 
     this.setState({
       selectedOptionId: id,
-      defaultFolder: e.target.value,
+      defaultYear: e.target.value,
       isDisabled: false,
       videos: [...this.state.defaultVideos, ...filteredVideoData],
     });
@@ -111,12 +112,12 @@ class CCPC extends Component {
     this.requestInitialData();
     this.setState({
       selectedOptionId: 0,
-      defaultFolder: "select folder",
+      defaultYear: "select year",
       defaultVideo: "select video",
       isDisabled: true,
-      defaultVideos: [{ video_id: 0, title: "select folder" }],
-      folders: [{ year_id: 0, name: "select folder" }],
-      videos: [{ video_id: 0, title: "select folder" }],
+      defaultVideos: [{ video_id: 0, title: "select year" }],
+      years: [{ year_id: 0, name: "select year" }],
+      videos: [{ video_id: 0, title: "select year" }],
     });
   };
 
@@ -129,10 +130,10 @@ class CCPC extends Component {
 
   render() {
     const {
-      defaultFolder,
+      defaultYear,
       defaultVideo,
       isDisabled,
-      folders,
+      years,
       videos,
       isShowPlayer,
       date,
@@ -140,7 +141,7 @@ class CCPC extends Component {
       verse,
       video_id,
     } = this.state;
-    console.log(isShowPlayer);
+
     return (
       <>
         <section className="CCPC__body">
@@ -154,13 +155,13 @@ class CCPC extends Component {
           </div>
 
           <SelectVideo
-            defaultFolder={defaultFolder}
+            defaultYear={defaultYear}
             defaultVideo={defaultVideo}
-            folders={folders}
+            years={years}
             videos={videos}
             isDisabled={isDisabled}
             handleSelectBtn={this.handleSelectBtn}
-            handleFolderOption={this.handleFolderOption}
+            handleYearOption={this.handleYearOption}
             handleVideoOption={this.handleVideoOption}
           />
           {/* SHOWS VIDEO PLAYER AFTER SELECTING OPTIONS */}

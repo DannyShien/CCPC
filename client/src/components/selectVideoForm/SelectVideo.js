@@ -4,33 +4,33 @@ import DropDown from "../dropDown/DropDown";
 import Button from "../button/Button";
 
 const SelectVideo = ({
-  defaultFolder,
-  folders,
+  defaultYear,
+  years,
   defaultVideo,
   videos,
   isDisabled,
   handleSelectBtn,
-  handleFolderOption,
+  handleYearOption,
   handleVideoOption,
 }) => {
   return (
     <div className="options">
       <form className="optionsForm" onSubmit={handleSelectBtn}>
         <label>
-          Select Folder
+          Select Year
           <DropDown
-            defaultValue={defaultFolder}
-            handleOptions={handleFolderOption}
-            selectFolders={folders}
+            defaultValue={defaultYear}
+            handleOptions={handleYearOption}
+            selectOptions={years}
           />
         </label>
 
-        {defaultFolder ? (
+        {defaultYear ? (
           <label>
             Select Video
             <DropDown
               defaultValue={defaultVideo}
-              selectFolders={videos}
+              selectOptions={videos}
               isDisabled={isDisabled}
               handleOptions={handleVideoOption}
             />

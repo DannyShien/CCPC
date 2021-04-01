@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import "./CreateFolder.css";
+import "./CreateYear.css";
 import Input from "../input/Input";
 import Button from "../button/Button";
 import axios from "axios";
 
-class CreateFolder extends Component {
+class CreateYear extends Component {
   state = {
-    folderName: "",
+    year: "",
   };
 
   handleInputChange = (e) => {
@@ -15,10 +15,10 @@ class CreateFolder extends Component {
     });
   };
 
-  submitNewFolder = async (e) => {
+  submitNewYear = async (e) => {
     e.preventDefault();
     try {
-      const name = this.state.folderName;
+      const name = this.state.year;
       await axios.post(`http://localhost:5000/years`, {
         name,
       });
@@ -31,22 +31,22 @@ class CreateFolder extends Component {
 
   reset = () => {
     this.setState({
-      folderName: "",
+      year: "",
     });
   };
 
   render() {
-    const { folderName } = this.state;
+    const { year } = this.state;
 
     return (
       <>
-        <form className="videoCenterForm" onSubmit={this.submitNewFolder}>
+        <form className="videoCenterForm" onSubmit={this.submitNewYear}>
           <label htmlFor="create">Create Folder</label>
           <Input
             type="text"
             formId="create"
-            name="folderName"
-            value={folderName}
+            name="year"
+            value={year}
             style={{ width: "35%" }}
             handleInput={this.handleInputChange}
           />
@@ -57,4 +57,4 @@ class CreateFolder extends Component {
   }
 }
 
-export default CreateFolder;
+export default CreateYear;

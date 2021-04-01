@@ -12,7 +12,7 @@ class EditVideo extends Component {
     verse: "",
     isDisabled: true,
     selectedOptionId: 0,
-    defaultFolder: "select folder",
+    defaultYear: "select year",
     defaultVideo: "select video",
     videos: [{ video_id: 0, title: "select video" }],
   };
@@ -23,7 +23,7 @@ class EditVideo extends Component {
     });
   };
 
-  handleFolderOption = (e) => {
+  handleYearOption = (e) => {
     const videos = this.props.videos;
     let id = parseInt(e.target.value);
     let filteredVideoData = videos
@@ -34,7 +34,7 @@ class EditVideo extends Component {
 
     this.setState({
       selectedOptionId: id,
-      defaultFolder: e.target.value,
+      defaultYear: e.target.value,
       isDisabled: false,
       videos: [...this.state.videos, ...filteredVideoData],
     });
@@ -92,7 +92,7 @@ class EditVideo extends Component {
   //     });
   //   this.setState({
   //     selectedOptionId: id,
-  //     defaultFolder: id,
+  //     defaultYear: id,
   //     // isDisabled: true, // dont think this is needed
   //     videos: [...this.state.videos, ...filteredVideoData],
   //     // videos: this.state.videos, // resets video state
@@ -118,7 +118,7 @@ class EditVideo extends Component {
       isDisabled: true,
       selectedOptionId: 0,
       defaultVideo: "select video",
-      videos: [{ video_id: 0, title: "select folder" }],
+      videos: [{ video_id: 0, title: "select year" }],
     });
   };
 
@@ -127,22 +127,22 @@ class EditVideo extends Component {
       date,
       title,
       verse,
-      defaultFolder,
+      defaultYear,
       defaultVideo,
       isDisabled,
       videos,
     } = this.state;
-    const { folders } = this.props;
-    console.log(defaultVideo);
+    const { years } = this.props;
+    // console.log(defaultVideo);
     return (
       <>
         <form className="form" onSubmit={this.editVideo}>
           <label>
-            Select Folder
+            Select Year
             <DropDown
-              defaultValue={defaultFolder}
-              handleOptions={this.handleFolderOption}
-              selectFolders={folders}
+              defaultValue={defaultYear}
+              handleOptions={this.handleYearOption}
+              selectOptions={years}
             />
           </label>
 
@@ -151,7 +151,7 @@ class EditVideo extends Component {
               Select Video
               <DropDown
                 defaultValue={defaultVideo}
-                selectFolders={videos}
+                selectOptions={videos}
                 isDisabled={isDisabled}
                 handleOptions={this.handleVideoOption}
               />
@@ -164,6 +164,7 @@ class EditVideo extends Component {
               type="text"
               name="date"
               value={date}
+              placeholder="yyyy-mm-dd"
               required
               style={{ width: "65%" }}
               handleInput={this.handleInputChange}

@@ -25,7 +25,13 @@ CREATE TABLE videos (
   -- CONSTRAINT fk_year FOREIGN KEY (year_id) REFERENCES years (year_id) ON DELETE CASCADE
   -- user_id integer REFERENCES users (id)
 
-
+CREATE TABLE sermons (
+  sermon_id SERIAL PRIMARY KEY, 
+  title text, 
+  verse text, 
+  input_date date, 
+  video_key text
+);
 
 
 

@@ -3,6 +3,7 @@ import "../../stylesheet/Styles.css";
 import "./LiveVideo.css";
 import Input from "../../components/input/Input";
 import Button from "../../components/button/Button";
+import axios from "axios";
 
 class LiveVideo extends Component {
   state = {
@@ -18,8 +19,24 @@ class LiveVideo extends Component {
     });
   };
 
-  UploadNewVideo = (e) => {
+  submitNewSermon = async (e) => {
     e.preventDefault();
+    try {
+      const title = this.state.title;
+      const verse = this.state.verse;
+      const input_date = this.state.date;
+      const video_key = this.state.videoId;
+      await axios.post(`http://localhost:5000/sermons`, {
+        title,
+        verse,
+        input_date,
+        video_key,
+      });
+      window.location = "/admin/livevideo";
+    } catch (err) {
+      console.error(err.message);
+    }
+    this.reset();
   };
 
   reset = () => {
@@ -32,19 +49,22 @@ class LiveVideo extends Component {
   };
 
   render() {
+    const { date, title, verse, videoId } = this.state;
+
     return (
       <div className="liveUpload">
         <div className="uploadForm">
-          <form className="form" onSubmit={this.UploadNewVideo}>
+          <form className="form" onSubmit={this.submitNewSermon}>
             <label>
               Date
               <Input
                 type="text"
                 name="date"
-                value={this.state.date}
+                value={date}
+                placeholder="yyyy-mm-dd"
                 required
                 style={{ width: "65%" }}
-                handleInputChange={this.handleInputChange}
+                handleInput={this.handleInputChange}
               />
             </label>
             <label>
@@ -52,10 +72,10 @@ class LiveVideo extends Component {
               <Input
                 type="text"
                 name="title"
-                value={this.state.title}
+                value={title}
                 required
                 style={{ width: "65%" }}
-                handleInputChange={this.handleInputChange}
+                handleInput={this.handleInputChange}
               />
             </label>
             <label>
@@ -63,10 +83,10 @@ class LiveVideo extends Component {
               <Input
                 type="text"
                 name="verse"
-                value={this.state.verse}
+                value={verse}
                 required
                 style={{ width: "65%" }}
-                handleInputChange={this.handleInputChange}
+                handleInput={this.handleInputChange}
               />
             </label>
             <label>
@@ -74,10 +94,10 @@ class LiveVideo extends Component {
               <Input
                 type="text"
                 name="videoId"
-                value={this.state.videoId}
+                value={videoId}
                 required
                 style={{ width: "65%" }}
-                handleInputChange={this.handleInputChange}
+                handleInput={this.handleInputChange}
               />
             </label>
 

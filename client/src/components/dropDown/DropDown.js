@@ -4,7 +4,7 @@ import "./DropDown.css";
 const DropDown = ({
   defaultValue,
   handleOptions,
-  selectFolders,
+  selectOptions,
   isDisabled,
 }) => {
   return (
@@ -15,14 +15,14 @@ const DropDown = ({
         onChange={handleOptions}
         disabled={isDisabled}
       >
-        {selectFolders.map((folder, i) => {
-          let name = folder.name;
-          let year_id = folder.year_id;
-          let title = folder.title;
-          let video_id = folder.video_id;
+        {selectOptions.map((option, i) => {
+          let year = option.name;
+          let year_id = option.year_id;
+          let title = option.title;
+          let video_id = option.video_id;
           return (
             <option value={video_id ? video_id : year_id} key={i}>
-              {name ? name : title}
+              {year ? year : title}
             </option>
           );
         })}
