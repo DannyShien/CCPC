@@ -12,7 +12,7 @@ class UploadVideo extends Component {
     date: "",
     videoId: "",
     selectedOptionId: 0,
-    defaultYear: "select year",
+    defaultYearText: "select year",
   };
 
   handleInputChange = (e) => {
@@ -26,7 +26,7 @@ class UploadVideo extends Component {
     let id = parseInt(e.target.value);
     this.setState({
       selectedOptionId: id,
-      defaultYear: e.target.value,
+      defaultYearText: e.target.value,
     });
   };
 
@@ -62,10 +62,8 @@ class UploadVideo extends Component {
     };
   };
 
-  // NOTES: Possibly fetch data and display as "placeholder" for input fields.
-
   render() {
-    const { defaultYear, date, title, verse, videoId } = this.state;
+    const { defaultYearText, date, title, verse, videoId } = this.state;
     const { years } = this.props;
 
     return (
@@ -74,7 +72,7 @@ class UploadVideo extends Component {
           <label>
             Select Year
             <DropDown
-              defaultValue={defaultYear}
+              defaultValue={defaultYearText}
               handleOptions={this.handleYearOption}
               selectOptions={years}
             />

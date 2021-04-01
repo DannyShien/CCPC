@@ -8,13 +8,14 @@ import SelectVideo from "../../components/selectVideoForm/SelectVideo";
 class CCPC extends Component {
   state = {
     selectedOptionId: 0,
-    defaultYear: "select year",
-    defaultVideo: "select video",
+    defaultYearText: "select year",
+    defaultVideoText: "select video",
     isDisabled: true,
     isShowPlayer: false,
     defaultVideos: [{ video_id: 0, title: "select video" }],
     years: [{ year_id: 0, name: "select year" }],
-    videos: [{ video_id: 0, title: "select video" }],
+    videos: [],
+    updatedVideos: [{ video_id: 0, title: "select video" }],
 
     date: "",
     title: "",
@@ -42,7 +43,7 @@ class CCPC extends Component {
 
       this.setState({
         years: [...this.state.years, ...years],
-        videos: [...this.state.videos, ...videos],
+        videos: [...this.state.defaultVideos, ...videos],
       });
     } catch (err) {
       console.error(err.message);
@@ -50,9 +51,7 @@ class CCPC extends Component {
   };
 
   handleYearOption = (e) => {
-    // NOTES: Find solution to update state everytime a new id is selected. Hopefully this should resolve the issue of user not being able to re-select an option.
     let id = parseInt(e.target.value);
-
     const videos = this.state.videos;
     let filteredVideoData = videos
       .filter((video) => video.year_id === id)
@@ -62,9 +61,9 @@ class CCPC extends Component {
 
     this.setState({
       selectedOptionId: id,
-      defaultYear: e.target.value,
+      defaultYearText: e.target.value,
       isDisabled: false,
-      videos: [...this.state.defaultVideos, ...filteredVideoData],
+      updatedVideos: [...this.state.defaultVideos, ...filteredVideoData],
     });
   };
 
@@ -73,16 +72,19 @@ class CCPC extends Component {
 
     this.setState({
       selectedOptionId: id,
-      defaultVideo: e.target.value,
+      defaultVideoText: e.target.value,
     });
   };
 
   handleSelectBtn = (e) => {
     e.preventDefault();
     let id = this.state.selectedOptionId;
-    const videos = this.state.videos;
-    let selectedVideo = videos.filter((video) => video.video_id === id)[0];
-    let convertedDate = new Date(selectedVideo.posting_date);
+    const updatedVideo = this.state.updatedVideos;
+    console.log(updatedVideo);
+    let selectedVideo = updatedVideo.filter(
+      (video) => video.video_id === id
+    )[0];
+    let convertedDate = new Date(selectedVideo.input_date);
     let date = convertedDate.toLocaleDateString();
     let title = this.capitalizeName(selectedVideo.title);
     let verse = this.capitalizeName(selectedVideo.verse);
@@ -112,29 +114,21 @@ class CCPC extends Component {
     this.requestInitialData();
     this.setState({
       selectedOptionId: 0,
-      defaultYear: "select year",
-      defaultVideo: "select video",
+      defaultYearText: "select year",
+      defaultVideoText: "select video",
       isDisabled: true,
-      defaultVideos: [{ video_id: 0, title: "select year" }],
       years: [{ year_id: 0, name: "select year" }],
       videos: [{ video_id: 0, title: "select year" }],
     });
   };
 
-  // METHODS RELATING TO YOUTUBE FUNCTIONALITY // NOTES: not really need at this moment.
-  // onReady = (e) => {
-  //   console.log(e.target);
-  //   // e.target.pauseVideo();
-  //   e.target.playVideo();
-  // };
-
   render() {
     const {
-      defaultYear,
-      defaultVideo,
+      defaultYearText,
+      defaultVideoText,
       isDisabled,
       years,
-      videos,
+      updatedVideos,
       isShowPlayer,
       date,
       title,
@@ -155,10 +149,10 @@ class CCPC extends Component {
           </div>
 
           <SelectVideo
-            defaultYear={defaultYear}
-            defaultVideo={defaultVideo}
+            defaultYearText={defaultYearText}
+            defaultVideoText={defaultVideoText}
             years={years}
-            videos={videos}
+            videos={updatedVideos}
             isDisabled={isDisabled}
             handleSelectBtn={this.handleSelectBtn}
             handleYearOption={this.handleYearOption}

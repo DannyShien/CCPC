@@ -46,11 +46,7 @@ class VideoCenter extends Component {
       <>
         {/* ========= CREATE YEAR ========== */}
         <div className="create__folder">
-          <CreateYear
-          // submitNewYear={this.submitNewYear}
-          // years={this.state.years}
-          // handleInputChange={this.handleInputChange}
-          />
+          <CreateYear />
         </div>
 
         {/* ========== UPLOAD VIDEO ========== */}
@@ -66,10 +62,10 @@ class VideoCenter extends Component {
         </div>
 
         {/* ========== EDIT VIDEO ========== */}
-        <p style={{ fontSize: "60%" }}>
+        {/* <p style={{ fontSize: "60%" }}>
           * disclaimer: please refresh page before re-selecting a different
           option *
-        </p>
+        </p> */}
 
         <div className="form_section">
           <p>Edit Video</p>
