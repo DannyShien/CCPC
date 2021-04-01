@@ -2,18 +2,18 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./Nav.css";
 
-const Navbar = ({ convertedDate, today }) => {
-  // console.log(convertedDate, today);
+const Navbar = ({ inputDate, today }) => {
+  // console.log(inputDate, today);
   return (
     <div className="main__navbar">
       <Link to="/" className="nav__link">
         Previous Sermons
       </Link>
 
-      {convertedDate === today ? (
+      {inputDate === today ? (
         <Link to="/livesermon" className="nav__link">
-          {/* NOTE: Maybe change name of live sermon to today's sermon? Link will become inactive after date changes... */}
-          Live Sermon
+          {/* NOTE: Maybe change name of live sermon to sunday sermon? Link will become inactive after date changes... */}
+          Sunday Sermon
         </Link>
       ) : (
         <div className="dead__link">Live Sermon</div>

@@ -50,8 +50,6 @@ class LiveSermon extends Component {
     return namesUpper.join(" ");
   };
 
-  // NOTES: Find solution to allow this component to render when something is true
-
   render() {
     const { date, title, verse, video_id, isShowPlayer } = this.state;
 

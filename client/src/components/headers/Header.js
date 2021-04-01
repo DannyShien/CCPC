@@ -46,7 +46,7 @@ class Header extends Component {
           <p>Crossings Community</p>
           <p>Presbyterian Church</p>
         </div>
-        <Navbar convertedDate={convertedDate} today={dateNow} />
+        <Navbar inputDate={convertedDate} today={dateNow} />
       </div>
     );
   }

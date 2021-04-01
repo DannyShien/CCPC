@@ -1,4 +1,4 @@
-.adminHeader {
+.admin__header {
   align-items: center;
   background-color: white;
   border-bottom: 3px outset lightgray;
@@ -6,8 +6,26 @@
   height: 20vh;
   justify-content: space-between;
 }
-.adminHeader h1 {
-  padding-left: 4%;
+.admin__title {
+  align-items: center;
+  display: flex;
+  height: inherit;
+  justify-content: space-around;
+  margin-left: 5%;
+  width: 30%;
+}
+.title__link {
+  align-items: center;
+  color: black;
+  display: flex;
+  height: 50%;
+  justify-content: center;
+  text-decoration: none;
+  width: 40%;
+}
+.title__link h1 {
+  font-size: 200%;
+  margin: 0;
 }
 .logo {
   height: 75%;
