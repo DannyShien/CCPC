@@ -222,7 +222,7 @@ app.put("/videos/:id", async (req, res) => {
 });
 
 // ========== DELETE ==========/
-// DELETE YEAR
+// DELETE YEARS
 app.delete("/years/:id", async (req, res) => {
   try {
     const { id } = req.params;
@@ -245,6 +245,20 @@ app.delete("/videos/:id", async (req, res) => {
       [id]
     );
     res.json(deleteVideo);
+  } catch (err) {
+    console.error(err.message);
+  }
+});
+
+// DELETE SERMONS
+app.delete("/sermons/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const deleteSermon = await pool.query(
+      "DELETE FROM sermons WHERE sermon_id = $1",
+      [id]
+    );
+    res.json(deleteSermon);
   } catch (err) {
     console.error(err.message);
   }
