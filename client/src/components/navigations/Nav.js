@@ -2,21 +2,19 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./Nav.css";
 
-const Navbar = ({ inputDate, today }) => {
-  // console.log(inputDate, today);
+const Navbar = ({ isActive }) => {
   return (
     <div className="main__navbar">
       <Link to="/" className="nav__link">
         Previous Sermons
       </Link>
 
-      {inputDate === today ? (
-        <Link to="/livesermon" className="nav__link">
-          {/* NOTE: Maybe change name of live sermon to sunday sermon? Link will become inactive after date changes... */}
-          Sunday Sermon
+      {isActive ? (
+        <Link to="/liveservice" className="nav__link">
+          Live Service
         </Link>
       ) : (
-        <div className="dead__link">Live Sermon</div>
+        <div className="dead__link">Live Service</div>
       )}
 
       <Link to="/about" className="nav__link">
@@ -27,3 +25,5 @@ const Navbar = ({ inputDate, today }) => {
 };
 
 export default Navbar;
+
+// become a web developer in 2021	legit step by step guide	2021-03-31	iWK1bpbvryg

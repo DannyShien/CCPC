@@ -4,7 +4,7 @@ import CCPC from "../pages/landing/CCPC";
 import Header from "../components/headers/Header";
 
 const About = lazy(() => import("../pages/about/About"));
-const LiveSermon = lazy(() => import("../pages/liveSermon/LiveSermon"));
+const LiveService = lazy(() => import("../pages/liveService/LiveService"));
 const Admin = lazy(() => import("../pages/admin/Admin"));
 
 const Routes = () => {
@@ -16,7 +16,7 @@ const Routes = () => {
         <Header />
         {/* NOTE: Possibly change path name to /crossingcommunitypresbyterianchurch */}
         <Route exact path="/" component={CCPC} />
-        <Route path="/livesermon" component={LiveSermon} />
+        <Route path="/liveservice" component={LiveService} />
         <Route path="/about" component={About} />
         <Redirect to="/" />
       </Fragment>
