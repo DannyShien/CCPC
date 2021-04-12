@@ -1,0 +1,12 @@
+.email__form {
+  /* background-color: aliceblue; */
+  height: 40vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+}
+.input__wrapper {
+  display: flex;
+  justify-content: space-between;
+}

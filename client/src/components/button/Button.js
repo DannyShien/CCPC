@@ -1,7 +1,7 @@
 import React from "react";
 import "./Button.css";
 
-const Button = ({ style, type, text, handleClick, isActive }) => {
+const Button = ({ style, type, text, handleClick, disabled }) => {
   return (
     <>
       <button
@@ -9,7 +9,7 @@ const Button = ({ style, type, text, handleClick, isActive }) => {
         type={type}
         value={text}
         style={style}
-        disabled={isActive}
+        disabled={disabled}
         onClick={handleClick}
       >
         {text}

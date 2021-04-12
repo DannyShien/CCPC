@@ -1,0 +1,13 @@
+.form__body {
+  align-items: center;
+  border-style: ridge;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin-bottom: 2em;
+  padding: 2%;
+  width: 50%;
+}
+.form__body h4 {
+  margin-top: 0;
+}

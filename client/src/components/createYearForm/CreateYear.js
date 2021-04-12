@@ -40,8 +40,8 @@ class CreateYear extends Component {
 
     return (
       <>
-        <form className="videoCenterForm" onSubmit={this.submitNewYear}>
-          <label htmlFor="create">Create Folder</label>
+        <form className="createYear__form" onSubmit={this.submitNewYear}>
+          <label htmlFor="create">Create Year</label>
           <Input
             type="text"
             formId="create"
