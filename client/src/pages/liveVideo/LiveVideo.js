@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-// import { Redirect } from "react-router-dom";
 import "../../stylesheet/Styles.css";
 import "./LiveVideo.css";
 import Input from "../../components/input/Input";
@@ -58,7 +57,6 @@ class LiveVideo extends Component {
 
     return (
       <div className="uploadForm">
-        {/* {this.renderRedirect()} */}
         <form className="form" onSubmit={this.submitNewSermon}>
           <label>
             Date
