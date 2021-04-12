@@ -168,7 +168,7 @@ class EditVideo extends Component {
               type="submit"
               text="Remove"
               style={{ width: "45%" }}
-              handleDelete={this.deleteVideo}
+              handleBtn={this.deleteVideo}
             />
           </div>
         </form>

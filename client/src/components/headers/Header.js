@@ -7,35 +7,31 @@ import axios from "axios";
 
 class Header extends Component {
   state = {
-    convertedDate: "",
-    dateNow: "",
+    isActive: false,
   };
 
   componentDidMount() {
-    this.getCurrentSermon();
+    this.checkForService();
   }
 
-  getCurrentSermon = async () => {
+  checkForService = async () => {
     try {
       const sermonUrl = "http://localhost:5000/sermons";
       const sermonRequest = await axios.get(sermonUrl).then((res) => {
         return res.data;
       });
-      let lastSermon = sermonRequest.slice(-1)[0];
-      let convertedDate = new Date(lastSermon.input_date).toLocaleDateString();
-      let dateNow = new Date().toLocaleDateString();
+      let isSermon = sermonRequest.length;
 
-      this.setState({
-        convertedDate,
-        dateNow,
-      });
+      if (isSermon !== 0) {
+        this.setState({ isActive: true });
+      }
     } catch (err) {
       console.error(err.message);
     }
   };
 
   render() {
-    const { convertedDate, dateNow } = this.state;
+    const { isActive } = this.state;
 
     return (
       <div className="header sticky">
@@ -46,7 +42,7 @@ class Header extends Component {
           <p>Crossings Community</p>
           <p>Presbyterian Church</p>
         </div>
-        <Navbar inputDate={convertedDate} today={dateNow} />
+        <Navbar isActive={isActive} />
       </div>
     );
   }

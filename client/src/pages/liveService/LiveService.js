@@ -3,7 +3,7 @@ import Divider from "../../assets/Divider.png";
 import VideoPlayer from "../../components/videoDisplay/VideoPlayer";
 import axios from "axios";
 
-class LiveSermon extends Component {
+class LiveService extends Component {
   state = {
     date: "",
     title: "",
@@ -72,4 +72,4 @@ class LiveSermon extends Component {
   }
 }
 
-export default LiveSermon;
+export default LiveService;
