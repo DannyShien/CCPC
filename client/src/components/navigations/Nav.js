@@ -25,5 +25,3 @@ const Navbar = ({ isActive }) => {
 };
 
 export default Navbar;
-
-// become a web developer in 2021	legit step by step guide	2021-03-31	iWK1bpbvryg

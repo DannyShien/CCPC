@@ -112,7 +112,7 @@ class VideoCenter extends Component {
                     width: "65%",
                   }
             }
-            isActive={!isActive}
+            disabled={!isActive}
             handleClick={this.deleteSermon}
           />
         </div>
