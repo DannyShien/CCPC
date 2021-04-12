@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+// import { Redirect } from "react-router-dom";
 import "../../stylesheet/Styles.css";
 import "./LiveVideo.css";
 import Input from "../../components/input/Input";
@@ -11,6 +12,7 @@ class LiveVideo extends Component {
     title: "",
     verse: "",
     videoId: "",
+    redirect: false,
   };
 
   handleInputChange = (e) => {
@@ -21,6 +23,7 @@ class LiveVideo extends Component {
 
   submitNewSermon = async (e) => {
     e.preventDefault();
+    console.log(`SUBMIT`);
     try {
       const title = this.state.title;
       const verse = this.state.verse;
@@ -32,7 +35,9 @@ class LiveVideo extends Component {
         input_date,
         video_key,
       });
-      window.location = "/admin/livevideo";
+
+      // this.props.history.push("/liveservice"); // TRYING TO REDIRECT TO "/liveservice"
+      this.props.history.push("/");
     } catch (err) {
       console.error(err.message);
     }
@@ -52,63 +57,62 @@ class LiveVideo extends Component {
     const { date, title, verse, videoId } = this.state;
 
     return (
-      <div className="liveUpload">
-        <div className="uploadForm">
-          <form className="form" onSubmit={this.submitNewSermon}>
-            <label>
-              Date
-              <Input
-                type="text"
-                name="date"
-                value={date}
-                placeholder="yyyy-mm-dd"
-                required
-                style={{ width: "65%" }}
-                handleInput={this.handleInputChange}
-              />
-            </label>
-            <label>
-              Title
-              <Input
-                type="text"
-                name="title"
-                value={title}
-                required
-                style={{ width: "65%" }}
-                handleInput={this.handleInputChange}
-              />
-            </label>
-            <label>
-              Verse
-              <Input
-                type="text"
-                name="verse"
-                value={verse}
-                required
-                style={{ width: "65%" }}
-                handleInput={this.handleInputChange}
-              />
-            </label>
-            <label>
-              Video ID
-              <Input
-                type="text"
-                name="videoId"
-                value={videoId}
-                required
-                style={{ width: "65%" }}
-                handleInput={this.handleInputChange}
-              />
-            </label>
-
-            <Button
-              className="upload"
-              text="Upload"
-              type="submit"
-              style={{ alignSelf: "flex-end", width: "65%" }}
+      <div className="uploadForm">
+        {/* {this.renderRedirect()} */}
+        <form className="form" onSubmit={this.submitNewSermon}>
+          <label>
+            Date
+            <Input
+              type="text"
+              name="date"
+              value={date}
+              placeholder="yyyy-mm-dd"
+              required
+              style={{ width: "65%" }}
+              handleInput={this.handleInputChange}
             />
-          </form>
-        </div>
+          </label>
+          <label>
+            Title
+            <Input
+              type="text"
+              name="title"
+              value={title}
+              required
+              style={{ width: "65%" }}
+              handleInput={this.handleInputChange}
+            />
+          </label>
+          <label>
+            Verse
+            <Input
+              type="text"
+              name="verse"
+              value={verse}
+              required
+              style={{ width: "65%" }}
+              handleInput={this.handleInputChange}
+            />
+          </label>
+          <label>
+            Video ID
+            <Input
+              type="text"
+              name="videoId"
+              value={videoId}
+              required
+              style={{ width: "65%" }}
+              handleInput={this.handleInputChange}
+            />
+          </label>
+
+          <Button
+            className="upload"
+            text="Upload"
+            type="submit"
+            style={{ alignSelf: "flex-end", width: "65%" }}
+          />
+        </form>
       </div>
     );
   }

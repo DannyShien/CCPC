@@ -21,7 +21,7 @@ class Header extends Component {
         return res.data;
       });
       let isSermon = sermonRequest.length;
-      // let isSermon = 0;
+
       if (isSermon !== 0) {
         this.setState({ isActive: true });
       }
