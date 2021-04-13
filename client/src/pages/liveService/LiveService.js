@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Suspense } from "react";
 import Divider from "../../assets/Divider.png";
 import VideoPlayer from "../../components/videoDisplay/VideoPlayer";
 import axios from "axios";
@@ -64,8 +64,9 @@ class LiveService extends Component {
             <h1>{title}</h1>
             <h3>{verse}</h3>
           </div>
-
-          {isShowPlayer ? <VideoPlayer video_id={video_id} /> : null}
+          <Suspense>
+            {isShowPlayer ? <VideoPlayer video_id={video_id} /> : null}
+          </Suspense>
         </section>
       </>
     );

@@ -1,9 +1,13 @@
-import React, { Component } from "react";
+import React, { Component, Suspense, lazy } from "react";
 import "./CCPC.css";
 import Divider from "../../assets/Divider.png";
 import axios from "axios";
-import VideoPlayer from "../../components/videoDisplay/VideoPlayer";
+// import VideoPlayer from "../../components/videoDisplay/VideoPlayer";
 import SelectVideo from "../../components/selectVideoForm/SelectVideo";
+
+const VideoPlayer = lazy(() =>
+  import("../../components/videoDisplay/VideoPlayer")
+);
 
 class CCPC extends Component {
   state = {
@@ -158,8 +162,11 @@ class CCPC extends Component {
             handleYearOption={this.handleYearOption}
             handleVideoOption={this.handleVideoOption}
           />
-          {/* SHOWS VIDEO PLAYER AFTER SELECTING OPTIONS */}
-          {isShowPlayer ? <VideoPlayer video_id={video_id} /> : null}
+
+          <Suspense>
+            {/* SHOWS VIDEO PLAYER AFTER SELECTING OPTIONS */}
+            {isShowPlayer ? <VideoPlayer video_id={video_id} /> : null}
+          </Suspense>
         </section>
       </>
     );

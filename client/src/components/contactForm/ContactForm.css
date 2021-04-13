@@ -1,8 +1,7 @@
 .email__form {
-  /* background-color: aliceblue; */
-  height: 40vh;
   display: flex;
   flex-direction: column;
+  height: 45vh;
   justify-content: space-between;
   width: 100%;
 }
