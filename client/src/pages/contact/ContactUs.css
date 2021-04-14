@@ -11,3 +11,9 @@
 .form__body h4 {
   margin-top: 0;
 }
+
+@media (max-width: 768px) and (orientation: landscape) {
+  .form__body {
+    width: 75%;
+  }
+} ;

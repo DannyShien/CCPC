@@ -24,3 +24,32 @@
 .main__title p:last-child {
   font-size: 100%;
 }
+
+/* RESPONSIVE: TABLETS */
+@media (max-width: 768px) and (orientation: landscape) {
+  .logo__container {
+    width: 12vw;
+  }
+  .main__title {
+    width: 32vw;
+  }
+  .main__title p:first-child {
+    font-size: 120%;
+  }
+  .main__title p:last-child {
+    font-size: 90%;
+  }
+}
+
+/* RESPONSIVE: MOBILE */
+@media (max-width: 480px) and (orientation: landscape) {
+  .logo__container {
+    width: 18vw;
+  }
+  .main__title p:first-child {
+    font-size: 100%;
+  }
+  .main__title p:last-child {
+    font-size: 90%;
+  }
+} ;
