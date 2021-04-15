@@ -1,13 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./Nav.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars } from "@fortawesome/free-solid-svg-icons";
 
 const Navbar = ({ isActive }) => {
   return (
     <>
       <nav className="main__navbar">
         <div className="burger__menu">
-          <span class="fas fa-bars"></span>
+          <FontAwesomeIcon icon={faBars} />
         </div>
         <Link to="/" className="nav__link">
           Previous Sermons
