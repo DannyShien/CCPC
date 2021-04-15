@@ -49,4 +49,12 @@
   .nav__link:nth-child(2) {
     width: 25%;
   }
-} ;
+}
+
+/* RESPONSIVE: MOBILE */
+@media (max-width: 480px) and (orientation: landscape) {
+  /* NAVBAR BURGER-MENU */
+  .main__navbar {
+    display: hidden;
+  }
+}
