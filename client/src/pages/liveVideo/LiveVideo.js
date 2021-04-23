@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+// import { Redirect, withRouter } from "react-router-dom";
 import "../../stylesheet/Styles.css";
 import "./LiveVideo.css";
 import Input from "../../components/input/Input";
@@ -11,7 +12,7 @@ class LiveVideo extends Component {
     title: "",
     verse: "",
     videoId: "",
-    redirect: false,
+    // redirect: false,
   };
 
   handleInputChange = (e) => {
@@ -22,7 +23,6 @@ class LiveVideo extends Component {
 
   submitNewSermon = async (e) => {
     e.preventDefault();
-    console.log(`SUBMIT`);
     try {
       const title = this.state.title;
       const verse = this.state.verse;
@@ -40,6 +40,9 @@ class LiveVideo extends Component {
     } catch (err) {
       console.error(err.message);
     }
+    // this.setState({
+    //   redirect: true,
+    // });
     this.reset();
   };
 
@@ -49,14 +52,23 @@ class LiveVideo extends Component {
       title: "",
       verse: "",
       videoId: "",
+      // redirect: false,
     });
   };
+
+  // redirectPage = () => {
+  //   const { redirect } = this.state;
+  //   if (redirect) {
+  //     return <Redirect to="/liveservice" />;
+  //   }
+  // };
 
   render() {
     const { date, title, verse, videoId } = this.state;
 
     return (
       <div className="uploadForm">
+        {/* {this.redirectPage()} */}
         <form className="form" onSubmit={this.submitNewSermon}>
           <label>
             Date
@@ -116,4 +128,5 @@ class LiveVideo extends Component {
   }
 }
 
+// export default withRouter(LiveVideo);
 export default LiveVideo;

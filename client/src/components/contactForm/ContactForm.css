@@ -1,12 +1,18 @@
 .email__form {
-  /* background-color: aliceblue; */
-  height: 40vh;
   display: flex;
   flex-direction: column;
+  height: 45vh;
   justify-content: space-between;
   width: 100%;
 }
 .input__wrapper {
   display: flex;
   justify-content: space-between;
+}
+
+/* RESPONSIVE: MOBILE */
+@media screen and (max-width: 380px) {
+  .input__wrapper {
+    font-size: 75%;
+  }
 }

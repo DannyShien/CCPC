@@ -4,3 +4,11 @@
 .vision__content p {
   margin-top: 0;
 }
+
+/* RESPONSIVE: MOBILE */
+@media screen and (max-width: 380px) {
+  .vision__content {
+    padding: 5px;
+    width: auto;
+  }
+}

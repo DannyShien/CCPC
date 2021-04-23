@@ -1,15 +1,14 @@
 .options {
   display: flex;
-  height: 20vh;
-  justify-content: center;
+  height: 10vh;
+  align-items: center;
   width: 100vw;
 }
 .optionsForm {
   display: flex;
-  flex-direction: column;
-  height: 100%;
+  /* height: 100%; */
   justify-content: space-evenly;
-  width: 30vw;
+  width: 100vw;
 }
 .optionsForm label {
   align-items: center;
@@ -17,5 +16,21 @@
   font-size: 85%;
   height: 15%;
   justify-content: space-between;
-  width: 100%;
+  margin: 0 2%;
+  width: 50%;
 }
+
+/* RESPONSIVE: MOBILE */
+@media screen and (max-width: 380px) {
+  .options {
+    height: 20vh;
+  }
+  .optionsForm {
+    flex-direction: column;
+    height: 100%;
+    align-items: center;
+  }
+  .optionsForm label {
+    width: 80%;
+  }
+} ;

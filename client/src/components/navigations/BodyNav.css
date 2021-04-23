@@ -18,3 +18,12 @@
   font-weight: 700;
   color: #688d9c;
 }
+
+@media (max-width: 768px) and (orientation: landscape) {
+  .navbar__title {
+    width: 15%;
+  }
+  .navbar__title:last-child {
+    width: 12%;
+  }
+} ;

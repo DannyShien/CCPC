@@ -1,4 +1,4 @@
-import React, { lazy, Fragment } from "react";
+import React, { Suspense, lazy, Fragment } from "react";
 import { Route, Switch, Link, useRouteMatch } from "react-router-dom";
 import "../../stylesheet/Styles.css";
 import "./BodyNav.css";
@@ -30,15 +30,17 @@ const BodyNav = ({ kim, statement, vision, contact }) => {
       </section>
 
       <section className="container">
-        <Switch>
-          <Fragment>
-            <Route exact path={"/about"} component={Bio} />
-            <Route path={`${path}/bio`} component={Bio} />
-            <Route path={`${path}/statement`} component={MissionStatement} />
-            <Route path={`${path}/vision`} component={Vision} />
-            <Route path={`${path}/contact`} component={Contact} />
-          </Fragment>
-        </Switch>
+        <Suspense>
+          <Switch>
+            <Fragment>
+              <Route exact path={"/about"} component={Bio} />
+              <Route path={`${path}/bio`} component={Bio} />
+              <Route path={`${path}/statement`} component={MissionStatement} />
+              <Route path={`${path}/vision`} component={Vision} />
+              <Route path={`${path}/contact`} component={Contact} />
+            </Fragment>
+          </Switch>
+        </Suspense>
       </section>
     </>
   );

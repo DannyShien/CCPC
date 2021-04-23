@@ -2,25 +2,31 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./Nav.css";
 
-const Navbar = ({ isActive }) => {
+const Navbar = ({ isActive, isOpen, handleOpenBurger }) => {
   return (
-    <div className="main__navbar">
-      <Link to="/" className="nav__link">
-        Previous Sermons
-      </Link>
-
-      {isActive ? (
-        <Link to="/liveservice" className="nav__link">
-          Live Service
+    <>
+      <nav className={isOpen ? "main__navbar active" : "main__navbar "}>
+        <Link to="/" className="nav__link" onClick={handleOpenBurger}>
+          Previous Sermons
         </Link>
-      ) : (
-        <div className="dead__link">Live Service</div>
-      )}
 
-      <Link to="/about" className="nav__link">
-        About
-      </Link>
-    </div>
+        {isActive ? (
+          <Link
+            to="/liveservice"
+            className="nav__link"
+            onClick={handleOpenBurger}
+          >
+            Live Service
+          </Link>
+        ) : (
+          <div className="dead__link">Live Service</div>
+        )}
+
+        <Link to="/about" className="nav__link" onClick={handleOpenBurger}>
+          About
+        </Link>
+      </nav>
+    </>
   );
 };
 

@@ -11,3 +11,11 @@
 .form__body h4 {
   margin-top: 0;
 }
+
+/* RESPONSIVE: MOBILE */
+@media screen and (max-width: 380px) {
+  .form__body {
+    margin: 0 5px;
+    width: 95vw;
+  }
+}

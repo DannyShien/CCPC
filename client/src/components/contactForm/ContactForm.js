@@ -13,7 +13,7 @@ const ContactForm = () => {
 
   return (
     <>
-      <h4>Add a statement here for users to see</h4>
+      {/* <h4>Add a statement here for users to see</h4> */}
       <form className="email__form" onSubmit={handleSubmit}>
         <div className="input__wrapper">
           <label htmlFor="full_name">Full Name</label>

@@ -15,24 +15,10 @@ code {
 /* === STICKY TOP NAV === */
 .sticky {
   left: 0;
-  overflow: hidden;
+  /* overflow: auto; */
   position: sticky;
   top: 0;
   z-index: 1;
-}
-
-/* ===== LOGO ===== */
-.logo__container {
-  align-items: center;
-  display: flex;
-  height: 15vh;
-  justify-content: flex-end;
-  padding: 0 10px 20px 0;
-  width: 10vw;
-}
-.logo__image {
-  height: 12vh;
-  width: auto;
 }
 
 /* === DIVIDER IMAGE CSS === */
@@ -69,4 +55,34 @@ code {
   display: flex;
   height: 15%;
   justify-content: space-between;
+}
+
+/* DISPLAY PAGE FOR VIDEOS */
+.CCPC__body {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+  width: inherit;
+}
+.titles {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+.titles h4 {
+  font-weight: 400;
+  margin: 5px 0;
+  text-align: center;
+}
+.titles p {
+  margin: 5px 0 10px 0;
+}
+.titles h1 {
+  margin: 5px 0;
+}
+.titles h3 {
+  font-weight: 400;
+  margin: 5px 0;
+  text-align: center;
 }

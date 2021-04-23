@@ -8,13 +8,14 @@ import axios from "axios";
 class Header extends Component {
   state = {
     isActive: false,
+    isOpen: false,
   };
 
   componentDidMount() {
-    this.checkForService();
+    this.checkForSermon();
   }
 
-  checkForService = async () => {
+  checkForSermon = async () => {
     try {
       const sermonUrl = "http://localhost:5000/sermons";
       const sermonRequest = await axios.get(sermonUrl).then((res) => {
@@ -30,20 +31,44 @@ class Header extends Component {
     }
   };
 
+  openBurger = () => {
+    this.setState({
+      isOpen: !this.state.isOpen,
+    });
+  };
+
   render() {
-    const { isActive } = this.state;
+    const { isActive, isOpen } = this.state;
 
     return (
-      <div className="header sticky">
-        <div className="logo__container">
-          <img className="logo__image" src={Logo} alt="church logo" />
+      <>
+        <div className={isOpen ? "header sticky active" : "header sticky"}>
+          <div className="header__content">
+            <div className="logo__container">
+              <img className="logo__image" src={Logo} alt="church logo" />
+            </div>
+            <div className="main__title">
+              <p>Crossings Community</p>
+              <p>Presbyterian Church</p>
+            </div>
+          </div>
+
+          <Navbar
+            isActive={isActive}
+            isOpen={isOpen}
+            handleOpenBurger={this.openBurger}
+          />
+
+          <div
+            className={isOpen ? "burger toggle" : "burger"}
+            onClick={this.openBurger}
+          >
+            <div className="line1"></div>
+            <div className="line2"></div>
+            <div className="line3"></div>
+          </div>
         </div>
-        <div className="main__title">
-          <p>Crossings Community</p>
-          <p>Presbyterian Church</p>
-        </div>
-        <Navbar isActive={isActive} />
-      </div>
+      </>
     );
   }
 }
