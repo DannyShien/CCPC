@@ -9,3 +9,10 @@
   display: flex;
   justify-content: space-between;
 }
+
+/* RESPONSIVE: MOBILE */
+@media screen and (max-width: 380px) {
+  .input__wrapper {
+    font-size: 75%;
+  }
+}

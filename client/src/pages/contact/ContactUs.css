@@ -12,8 +12,10 @@
   margin-top: 0;
 }
 
-@media (max-width: 768px) and (orientation: landscape) {
+/* RESPONSIVE: MOBILE */
+@media screen and (max-width: 380px) {
   .form__body {
-    width: 75%;
+    margin: 0 5px;
+    width: 95vw;
   }
-} ;
+}

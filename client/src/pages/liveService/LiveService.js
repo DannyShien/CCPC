@@ -1,4 +1,6 @@
 import React, { Component, Suspense } from "react";
+import "./LiveService.css";
+import "../../stylesheet/Styles.css";
 import Divider from "../../assets/Divider.png";
 import VideoPlayer from "../../components/videoDisplay/VideoPlayer";
 import axios from "axios";

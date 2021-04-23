@@ -4,6 +4,23 @@
 .bio__pic {
   height: 75%;
   float: left;
-  margin: 10px;
+  /* margin: 10px; */
+  padding: 10px;
   width: auto;
+}
+
+/* RESPONSIVE: MOBILE */
+@media screen and (max-width: 380px) {
+  .bio__content {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    width: auto;
+  }
+  .bio__pic {
+    width: 90%;
+  }
+  .bio__content p {
+    padding: 5px;
+  }
 }
