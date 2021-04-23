@@ -6,7 +6,6 @@
 }
 .optionsForm {
   display: flex;
-  /* height: 100%; */
   justify-content: space-evenly;
   width: 100vw;
 }

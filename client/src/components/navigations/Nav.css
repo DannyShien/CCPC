@@ -11,15 +11,7 @@
   text-align: center;
   width: 25%;
 }
-/* .nav__link:first-child {
-  width: 25%;
-}
-.nav__link:nth-child(2) {
-  width: 21%;
-}
-.nav__link:last-child {
-  width: 8%;
-} */
+
 .nav__link:hover {
   font-weight: 700;
   color: #688d9c;
