@@ -50,6 +50,29 @@
   width: 25px;
 }
 
+@media screen and (max-width: 480px) {
+  .header__content {
+    width: 40%;
+  }
+  .logo__container {
+    height: 100%;
+    justify-content: center;
+    padding: 0;
+  }
+  .logo__image {
+    height: 45%;
+  }
+  .main__title {
+    width: 75%;
+  }
+  .main__title p:first-child {
+    font-size: 80%;
+  }
+  .main__title p:last-child {
+    font-size: 70%;
+  }
+}
+
 /* RESPONSIVE: MOBILE */
 @media screen and (max-width: 380px) {
   .header {
@@ -63,7 +86,7 @@
     width: 100vw;
   }
   .logo__container {
-    width: 18vw;
+    width: 10vw;
     padding: 0;
     height: 75%;
   }
