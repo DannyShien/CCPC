@@ -8,3 +8,33 @@
   height: 2em;
   justify-content: center;
 }
+
+@media screen and (max-width: 760px) {
+  .button {
+    font-size: 70%;
+  }
+}
+
+@media screen and (max-width: 580px) {
+  button[style] {
+    width: 20% !important;
+  }
+  .button {
+    font-size: 65%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .button {
+    font-size: 65%;
+  }
+}
+
+@media screen and (max-width: 380px) {
+  button[style] {
+    width: 40% !important;
+  }
+  .button {
+    font-size: 75%;
+  }
+}

@@ -86,3 +86,42 @@ code {
   margin: 5px 0;
   text-align: center;
 }
+
+@media screen and (max-width: 890px) {
+  .titles h1 {
+    font-size: 130%;
+  }
+  .titles h3 {
+    font-size: 100%;
+  }
+  .sub__title {
+    font-size: 120%;
+  }
+  .content {
+    font-size: 90%;
+  }
+}
+
+@media screen and (max-width: 760px) {
+  .content {
+    width: 95%;
+  }
+  .titles p {
+    font-size: 90%;
+  }
+}
+
+@media screen and (max-width: 380px) {
+  .titles h1 {
+    font-size: 100%;
+    padding: 0 5%;
+    text-align: center;
+  }
+  .titles h3 {
+    font-size: 80%;
+    text-align: center;
+  }
+  .titles h4 {
+    font-size: 100%;
+  }
+}

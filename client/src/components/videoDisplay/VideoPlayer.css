@@ -9,6 +9,21 @@
   height: 19em;
   width: 32em;
 }
+@media screen and (max-width: 580px) {
+  .youtube {
+    height: 17em;
+    width: 26em;
+  }
+}
+@media screen and (max-width: 580px) {
+  .video__container {
+    height: 45%;
+  }
+  .youtube {
+    height: 12em;
+    width: 21em;
+  }
+}
 
 /* RESPONSIVE: MOBILE */
 @media screen and (max-width: 380px) {
@@ -16,7 +31,7 @@
     height: 45%;
   }
   .youtube {
-    height: 9em;
-    width: auto;
+    height: 11em;
+    width: 16em;
   }
 }
