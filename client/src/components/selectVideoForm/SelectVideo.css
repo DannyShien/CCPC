@@ -6,7 +6,6 @@
 }
 .optionsForm {
   display: flex;
-  /* height: 100%; */
   justify-content: space-evenly;
   width: 100vw;
 }
@@ -20,10 +19,37 @@
   width: 50%;
 }
 
+@media screen and (max-width: 760px) {
+  .optionsForm {
+    align-items: center;
+  }
+  .optionsForm label {
+    height: 100%;
+    font-size: 80%;
+  }
+}
+
+@media screen and (max-width: 580px) {
+  .options {
+    height: 7%;
+  }
+  .optionsForm label {
+    font-size: 70%;
+    margin: 0;
+    justify-content: space-evenly;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .optionsForm label {
+    font-size: 65%;
+  }
+}
+
 /* RESPONSIVE: MOBILE */
 @media screen and (max-width: 380px) {
   .options {
-    height: 20vh;
+    height: 15vh;
   }
   .optionsForm {
     flex-direction: column;

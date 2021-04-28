@@ -39,7 +39,7 @@ const SelectVideo = ({
         <Button
           type="submit"
           text="Select"
-          style={{ fontSize: "70%", margin: "0 2%", width: "35%" }}
+          style={{ margin: "0 2%", width: "35%" }}
         />
       </form>
     </div>

@@ -4,3 +4,9 @@
   letter-spacing: 1px;
   padding-left: 10px;
 }
+
+@media screen and (max-width: 890px) {
+  .input {
+    font-size: 70%;
+  }
+}
